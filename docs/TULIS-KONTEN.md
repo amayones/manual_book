@@ -55,10 +55,9 @@ since: 2026-09-01   # Tanggal halaman pertama dibuat. Wajib diisi agar badge
                       # "Baru" bisa tampil; bila kosong, halaman tidak pernah "Baru".
 ```
 
-> `level` dan `readTime` sudah tidak dirender di halaman maupun di kartu
-> Beranda, jadi boleh dihapus dari frontmatter bila tidak diperlukan. Keduanya
-> tetap dihitung build dan dipakai pengujian, jadi tidak ada yang rusak bila
-> dibiarkan.
+> `level` dan `readTime` sudah tidak dirender di halaman, jadi boleh
+> dihapus dari frontmatter bila tidak diperlukan. Keduanya tetap dihitung build
+> dan dipakai pengujian, jadi tidak ada yang rusak bila dibiarkan.
 
 ## 3. Isi halaman
 
@@ -69,6 +68,11 @@ pencarian.
 
 Halaman Beranda boleh dibuat lebih sederhana: cukup bagian `## Panduan`.
 Bilah tab disembunyikan otomatis bila halaman tidak punya video.
+
+Halaman Beranda (`00-beranda.md`) memakai `group: none` dan menampilkan
+logo besar, nama aplikasi, kotak pencarian besar, lalu seluruh bagian
+biasanya. Daftar halaman tidak lagi memakai kartu; navigasi lewat sidebar
+dan pencarian.
 
 ### Langkah
 

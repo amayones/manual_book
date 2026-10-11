@@ -8,6 +8,10 @@ Semua perubahan penting pada manual ini dicatat di sini. Tanggal terbaru selalu 
   dan "Masalah yang sering terjadi" dihapus karena isinya sudah ada di
   panduan dan video.
 - Bintang penanda halaman unggulan di sidebar dihapus.
+- Beranda tidak lagi menampilkan daftar kartu halaman, langsung ke penjelasan
+  singkat aplikasi. Navigasi lewat menu samping dan kotak pencarian.
+- Menu samping dirapikan: kategori dan submenu kini jelas bedanya, kategori
+  terbuka otomatis bila salah satu halamannya sedang dibuka.
 
 ## 5 Oktober 2026
 

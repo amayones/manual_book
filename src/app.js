@@ -474,8 +474,8 @@
 
 /**
    * Halaman Beranda: logo besar, nama aplikasi, kalimat penjelasan, kotak
-   * pencarian besar, kartu halaman per grup, lalu teks pengantar dari bagian
-   * biasa pada berkas 00-beranda.md.
+   * pencarian besar, lalu teks pengantar dari bagian biasa pada berkas
+   * 00-beranda.md. Navigasi halaman lain lewat sidebar dan pencarian.
    */
   function renderPembuka(artikel, halaman) {
     var meta = data.meta;
@@ -488,8 +488,6 @@
     pembuka.appendChild(buat('p', 'pembuka-teks', meta.tagline || halaman.summary));
     pembuka.appendChild(buatKotakCariBesar());
     artikel.appendChild(pembuka);
-
-    artikel.appendChild(buatKartuGrup());
 
     var bagian = halaman.bagianLain || [];
     if (bagian.length) {
@@ -534,56 +532,6 @@
 
   function metaPlaceholder() {
     return 'Contoh: login, dashboard, kata sandi';
-  }
-
-  /** Kartu halaman dikelompokkan sesuai grup di config. */
-  function buatKartuGrup() {
-    var wadah = buat('div', 'kelompok-kartu');
-    var meta = data.meta;
-    var urutan = halamanTerurut();
-
-    for (var g = 0; g < meta.groups.length; g += 1) {
-      var grup = meta.groups[g];
-      var isi = urutan.filter(function (h) { return h.group === grup.id; });
-      if (!isi.length) continue;
-
-      var bagian = buat('section', 'kelompok-kartu-bagian');
-      var judul = buat('h2', 'kelompok-kartu-judul', grup.label);
-      bagian.appendChild(judul);
-
-      var daftar = buat('ul', 'kartu-daftar');
-      for (var i = 0; i < isi.length; i += 1) {
-        daftar.appendChild(buatKartu(isi[i]));
-      }
-      bagian.appendChild(daftar);
-      wadah.appendChild(bagian);
-    }
-    return wadah;
-  }
-
-  function buatKartu(halaman) {
-    var li = buat('li');
-    var kartu = buat('a', 'kartu');
-    kartu.href = BASE;
-    kartu.setAttribute('data-action', 'buka-halaman');
-    kartu.setAttribute('data-halaman', halaman.id);
-
-    var kepala = buat('span', 'kartu-kepala');
-    var ikon = buat('span', 'kartu-ikon');
-    ikon.appendChild(buatIkon(halaman.icon));
-    kepala.appendChild(ikon);
-    kepala.appendChild(buat('span', 'kartu-judul', halaman.title));
-
-    var lencana = lencanaHalaman(halaman);
-    if (lencana.indexOf('baru') !== -1) {
-      kepala.appendChild(buat('span', 'lencana lencana-baru', 'Baru'));
-    } else if (lencana.indexOf('diperbarui') !== -1) {
-      kepala.appendChild(buat('span', 'lencana lencana-diperbarui', 'Diperbarui'));
-    }
-    kartu.appendChild(kepala);
-    kartu.appendChild(buat('span', 'kartu-ringkas', halaman.summary));
-    li.appendChild(kartu);
-    return li;
   }
 
   function terapkanTab(tab, panelPanduan, panelVideo) {
@@ -973,24 +921,34 @@
     (data.meta.groups || []).forEach(function (grup) {
       var isi = halamanTerurut().filter(function (h) { return h.group === grup.id; });
       if (!isi.length) return;
-      var buka = nav[grup.id] !== false;
+      // Kategori terbuka otomatis bila salah satu menu anaknya sedang aktif.
+      var buka = nav[grup.id] !== false
+        || isi.some(function (h) { return h.id === halamanSekarang; });
+      var idGrup = 'grup-' + grup.id;
+
       var kotak = buat('div', 'grup');
       var tombol = buatTombol('buka-grup', 'grup-tombol', null, {
         'data-grup': grup.id,
         'aria-expanded': buka ? 'true' : 'false',
+        'aria-controls': idGrup,
       });
-      var chevron = buat('span', 'grup-panah', '');
+      var chevron = buat('span', 'grup-panah');
       chevron.setAttribute('aria-hidden', 'true');
       chevron.appendChild(buatIkon('chevron', true));
-      var lencana = buat('span', 'grup-ikon');
-      lencana.appendChild(buatIkon(grup.icon));
-      tombol.appendChild(lencana);
+      var ikonGrup = buat('span', 'grup-ikon');
+      ikonGrup.setAttribute('aria-hidden', 'true');
+      ikonGrup.appendChild(buatIkon(grup.icon));
+      tombol.appendChild(ikonGrup);
       tombol.appendChild(buat('span', 'grup-label', grup.label));
       tombol.appendChild(chevron);
       kotak.appendChild(tombol);
 
+      // Pembungkus grid supaya buka-tutup bisa dianimasikan.
+      var pembungkus = buat('div', 'grup-isi');
+      pembungkus.id = idGrup;
+      if (!buka) pembungkus.setAttribute('inert', '');
+
       var daftar = buat('ul', 'grup-daftar');
-      daftar.hidden = !buka;
       isi.forEach(function (h) {
         var li = buat('li');
         var tautan = buat('a', 'menu-item');
@@ -1010,7 +968,8 @@
         li.appendChild(tautan);
         daftar.appendChild(li);
       });
-      kotak.appendChild(daftar);
+      pembungkus.appendChild(daftar);
+      kotak.appendChild(pembungkus);
       LACI_ISI.appendChild(kotak);
     });
 

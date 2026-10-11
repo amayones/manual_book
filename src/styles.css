@@ -33,8 +33,16 @@
   --t-isi: 1.125rem;
   --t-kecil: 1rem;
   --t-label: 0.8125rem;
+  --t-induk: 0.875rem;
+  --t-anak: 0.8125rem;
+
+  /* Sidebar: hierarki kategori dan menu anak. */
+  --sisi-aktif: color-mix(in srgb, var(--aksen) 15%, transparent);
+  --sisi-ahoy: color-mix(in srgb, var(--teks) 6%, transparent);
+  --sisi-aktif-teks: var(--aksen);
+
   --lebar: 74rem;
-  --lebar-sisi: 17rem;
+  --lebar-sisi: 16.25rem;
   --tinggi-bilah: 56px;
   --tinggi-kaki: 40px;
 
@@ -48,6 +56,7 @@
   --aksen-lembut: color-mix(in srgb, var(--aksen-gelap) 20%, black);
   --aksen-tulis: color-mix(in srgb, var(--aksen-gelap) 42%, white);
   --semburat: color-mix(in srgb, var(--aksen-gelap) 14%, transparent);
+  --sisi-aktif-teks: var(--aksen-gelap);
   --latar: #0a0f1a;
   --kartu: #131b2b;
   --kartu-2: #0f1724;
@@ -67,7 +76,8 @@
 [data-theme="light"] { color-scheme: light; }
 [data-theme="dark"] { color-scheme: dark; }
 
-[data-theme="dark"] a { color: var(--aksen-tulis); }
+/* Tautan di isi manual. Item menu sidebar punya warnanya sendiri. */
+[data-theme="dark"] a:not(.menu-item) { color: var(--aksen-tulis); }
 
 * { box-sizing: border-box; }
 
@@ -259,9 +269,9 @@ h1[tabindex="-1"]:focus-visible { outline: none; }
 /* -------------------------------------------------------------------- laci */
 
 .laci {
-  background: var(--kartu);
+  background: var(--kartu-2);
   border-inline-end: 1px solid var(--garis);
-  padding: 0.9rem 0.75rem 2rem;
+  padding: 0.75rem 0.75rem 2rem;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -280,23 +290,23 @@ h1[tabindex="-1"]:focus-visible { outline: none; }
   color: var(--teks-lembut);
 }
 
-.grup + .grup { margin-top: 0.35rem; }
+.grup + .grup { margin-top: 0.15rem; }
 
-/* Baris grup: badge lingkaran berikon, label, dan chevron. */
+/* Kategori (induk): lebih besar dan lebih terang daripada menu anak. */
 .grup-tombol {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.55rem;
   width: 100%;
-  min-height: 44px;
-  padding: 0.3rem 0.5rem;
+  min-height: 40px;
+  padding: 0 0.5rem;
   background: none;
   border: 0;
   border-radius: var(--sudut-kecil);
   color: var(--teks);
   font: inherit;
+  font-size: var(--t-induk);
   font-weight: 600;
-  font-size: var(--t-kecil);
   cursor: pointer;
   text-align: start;
 }
@@ -304,38 +314,41 @@ h1[tabindex="-1"]:focus-visible { outline: none; }
 .grup-ikon {
   display: grid;
   place-items: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 999px;
-  background: var(--aksen-lembut);
-  color: var(--aksen-tulis);
+  color: var(--teks-lembut);
   flex: none;
 }
 
-.grup-ikon .ikon { width: 1.1rem; height: 1.1rem; }
+.grup-ikon .ikon { width: 1.125rem; height: 1.125rem; }
 
 .grup-label { flex: 1; }
 
 .grup-panah {
   display: grid;
   place-items: center;
-  color: var(--teks-lembut);
-  transition: transform 160ms ease;
+  color: var(--garis-kuat);
 }
 
-.grup-panah .ikon { width: 1rem; height: 1rem; }
-
-/* Tertutup: chevron ke kanan. Terbuka: chevron ke bawah. */
+/* Terbuka: chevron ke bawah. Tertutup: chevron ke kanan. */
 .grup-tombol[aria-expanded="true"] .grup-panah { transform: rotate(90deg); }
+.grup-panah .ikon { width: 0.875rem; height: 0.875rem; }
 
-.grup-daftar {
+/* Pembungkus supaya buka-tutup bisa dianimasikan. */
+.grup-isi {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.grup-isi > .grup-daftar {
+  overflow: hidden;
   list-style: none;
-  margin: 0 0 0.4rem;
+  margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
+
+.grup-tombol[aria-expanded="false"] + .grup-isi { grid-template-rows: 0fr; }
 
 .menu-item {
   display: flex;
@@ -349,6 +362,35 @@ h1[tabindex="-1"]:focus-visible { outline: none; }
   font-size: var(--t-kecil);
 }
 
+/* Menu anak: lebih kecil, menjorok, dengan garis pemandu di kiri. */
+.grup-daftar .menu-item {
+  position: relative;
+  min-height: 32px;
+  margin-inline-start: 21px;
+  padding: 0.15rem 0.5rem 0.15rem 12px;
+  border-inline-start: 1px solid var(--garis);
+  border-radius: 0 var(--sudut-kecil) var(--sudut-kecil) 0;
+  gap: 0.5rem;
+  font-size: var(--t-anak);
+  font-weight: 400;
+}
+
+.grup-daftar .menu-item-ikon { color: var(--garis-kuat); }
+.grup-daftar .menu-item-ikon .ikon { width: 0.9375rem; height: 0.9375rem; }
+.grup-daftar .menu-item-aktif { font-weight: 400; }
+
+/* Garis aksen 2px menempel pada garis pemandu. */
+.grup-daftar .menu-item::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: -1px;
+  inset-block: 0;
+  width: 2px;
+  background: transparent;
+}
+
+.grup-daftar .menu-item-aktif::before { background: var(--aksen); }
+
 .menu-item-ikon {
   display: grid;
   place-items: center;
@@ -361,16 +403,27 @@ h1[tabindex="-1"]:focus-visible { outline: none; }
 .menu-item-teks { flex: 1; }
 
 .menu-item-aktif {
-  background: var(--aksen-lembut);
-  color: var(--aksen-tulis);
+  background: var(--sisi-aktif);
+  color: var(--sisi-aktif-teks);
   font-weight: 600;
 }
 
-.menu-item-aktif .menu-item-ikon { color: var(--aksen-tulis); }
+.menu-item-aktif .menu-item-ikon { color: var(--sisi-aktif-teks); }
 
-/* Beranda dan Catatan Perubahan sebagai item khusus di luar daftar grup. */
-.menu-beranda { margin-bottom: 0.35rem; }
+/* Beranda diperlakukan setingkat kategori. */
+.menu-beranda {
+  min-height: 40px;
+  padding: 0 0.5rem;
+  margin-bottom: 0.35rem;
+  font-size: var(--t-induk);
+  font-weight: 600;
+  color: var(--teks);
+}
 
+.menu-beranda .menu-item-ikon { color: var(--teks-lembut); }
+.menu-beranda .menu-item-ikon .ikon { width: 1.125rem; height: 1.125rem; }
+
+/* Catatan Perubahan tetap seperti semula: .menu-item umum tidak diubah. */
 .menu-khusus { margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid var(--garis); }
 
 .laci-kaki {
@@ -627,55 +680,6 @@ mark {
   white-space: nowrap;
 }
 
-/* ------------------------------------------------- kartu halaman per grup */
-
-.kelompok-kartu {
-  display: grid;
-  gap: 2rem;
-  margin-top: 2.5rem;
-}
-
-.kelompok-kartu-bagian { min-width: 0; }
-
-.kelompok-kartu-judul {
-  margin: 0 0 0.75rem;
-  font-size: var(--t-bagian);
-  font-weight: 600;
-  color: var(--teks);
-}
-
-.kartu-daftar {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.75rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
-}
-
-.kartu {
-  display: block;
-  height: 100%;
-  padding: 1rem 1.1rem;
-  background: var(--kartu);
-  border: 1px solid var(--garis);
-  border-radius: var(--sudut);
-  box-shadow: var(--bayang-kartu);
-  color: var(--teks);
-  text-decoration: none;
-}
-
-.kartu-ikon {
-  display: grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--sudut-kecil);
-  background: var(--aksen-kotak);
-  color: #fff;
-  flex: none;
-}
-
 .halaman-ikon {
   display: grid;
   place-items: center;
@@ -780,22 +784,6 @@ mark {
 .pembuka-isi li { margin-bottom: 0.2rem; }
 
 .grup-label { flex: 1; }
-
-.kartu-kepala {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  margin-bottom: 0.4rem;
-}
-
-.kartu-judul { font-weight: 600; font-size: var(--t-isi); }
-
-.kartu-ringkas {
-  display: block;
-  color: var(--teks-lembut);
-  font-size: var(--t-isi);
-}
 
 .lencana {
   font-size: var(--t-kecil);
@@ -1528,15 +1516,14 @@ mark {
 /* -------------------------------------------------------------- animasi */
 
 @media (prefers-reduced-motion: no-preference) {
-  .kartu { animation: muncul 180ms ease-out; }
   .panel { animation: panel-masuk 160ms ease-out; }
   .cahaya { animation: muncul 160ms ease-out; }
   .langkah, .video { animation: panel-masuk 160ms ease-out; }
 
-  .kartu,
   .tombol,
   .tab,
   .menu-item,
+  .grup-tombol,
   .tombol-salin,
   .video-bab-item,
   .daftar-isi-item,
@@ -1544,12 +1531,17 @@ mark {
     transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
   }
 
-  .kartu:hover,
+  /* Sidebar: hover halus dan buka-tutup kategori. */
+  .menu-item,
+  .grup-tombol { transition: background-color 160ms ease, color 160ms ease; }
+  .grup-isi { transition: grid-template-rows 220ms ease; }
+  .grup-panah { transition: transform 220ms ease; }
+
   .tombol:hover,
   .tab:hover { transform: translateY(-2px); }
 
-  .kartu:hover { box-shadow: var(--bayang-naik); }
-  .menu-item:hover { background: var(--kartu-2); }
+  .menu-item:hover { background: var(--sisi-ahoy); color: var(--teks); }
+  .grup-tombol:hover { background: var(--sisi-ahoy); }
   .daftar-isi-item:hover { background: var(--kartu-2); }
 }
 
@@ -1606,7 +1598,7 @@ mark {
 }
 
 @media (min-width: 1400px) {
-  :root { --lebar: 84rem; --lebar-sisi: 19rem; }
+  :root { --lebar: 84rem; }
 }
 
 /* Tablet: pencarian dikCAP agar header tetap satu baris. */
@@ -1647,16 +1639,18 @@ mark {
   }
 
   .wadah { padding-inline: 0.85rem; }
-  .kelompok-kartu { margin-top: 1.75rem; gap: 1.25rem; }
-  .kartu { padding: 0.85rem 0.9rem; }
   .pembuka { padding-top: 1.25rem; }
   .cari-besar-input { height: 50px; }
   .langkah, .video { padding-block: 1.25rem; }
   .video-bab-item { font-size: var(--t-kecil); padding: 0.4rem 0.7rem; }
   .langkah-judul { flex-wrap: wrap; }
   .tombol-salin { margin-inline-start: 2.35rem; }
-  .kartu-daftar { grid-template-columns: 1fr; }
   .tab { padding-inline: 0.8rem; }
+}
+
+/* Di layar sentuh menu anak dibuat lebih tinggi agar enak ditekuk. */
+@media (max-width: 1023px) {
+  .grup-daftar .menu-item { min-height: 40px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

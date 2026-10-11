@@ -21,6 +21,8 @@ const UKURAN_DIizinkan = [
   'var(--t-isi)',
   'var(--t-kecil)',
   'var(--t-label)',
+  'var(--t-induk)',
+  'var(--t-anak)',
 ];
 
 /** Membangun proyek uji lalu membaca CSS sumber yang sudah diawetkan. */

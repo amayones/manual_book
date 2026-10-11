@@ -379,7 +379,30 @@ Kepala setiap halaman hanya berisi ikon, judul, lencana (Baru atau
 Diperbarui), dan satu kalimat ringkasan. Waktu baca ("2 menit") dan
 indikator level tidak lagi ditampilkan karena membingungkan — keduanya sudah
 dihitung build dan tetap ada di berkas data, tetapi tidak dirender di mana
-pun. Kartu di Beranda memakai isi yang sama.
+pun.
+
+## Tampilan sidebar
+
+Sidebar memakai lebar 260 px dengan padding 12 px dan hierarki dua tingkat yang
+jelas. Kategori (Penjualan, Laporan) lebih besar dan lebih terang: tinggi
+40 px, huruf 14 px, ikon 18 px, dan chevron 14 px yang berputar 90 derajat saat
+dibuka-tutup. Menu anak lebih kecil dan lebih redup: tinggi 32 px, huruf
+13 px, ikon 15 px, menjorok 21 px dengan padding kiri 12 px, dan garis
+pemandu 1 px di sisi kiri. Di bawah 1024 px menu anak dibuat 40 px agar lebih
+nyaman ditekuk jari.
+
+Menu anak yang sedang aktif memakai latar biru transparan, teks dan ikon
+biru terang, serta garis aksen 2 px yang menempel pada garis pemandu.
+Kategori yang salah satu anaknya aktif terbuka otomatis. Grup yang tertutup
+ditandai `inert` sehingga menunya tidak bisa difokuskan, dan buka-tutupnya
+dianimasikan dengan `grid-template-rows` selama 220 ms (dilewati ketika
+pengguna meminta pengurangan gerak).
+
+Sidebar mengikuti tema terang dan gelap memakai palet yang sama dengan
+bagian halaman lainnya. Aturan `[data-theme="dark"] a` dikecualikan untuk
+item menu supaya warna hierarkinya tidak tertimpa.
+
+Item "Catatan Perubahan" sengaja dibiarkan seperti semula.
 
 Tombol Menu di navbar memakai latar warna aksen dengan ikon lebih besar
 daripada tulungannya, supaya jelas terbaca sebagai kontrol buka/tutup dan

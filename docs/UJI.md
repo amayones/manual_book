@@ -101,6 +101,34 @@ lulus):
 6. Tidak ada regresi pada seluruh lebar 320 sampai 1440px, tidak ada scroll
    horizontal, dan nol galat JavaScript.
 
+V1f (kartu Beranda dihapus dan hierarki sidebar, 65 skenario, semua lulus):
+
+1. Beranda tidak lagi memakai `.kartu`, `.kelompok-kartu`, atau
+   `.kartu-daftar`. Isinya hanya `pembuka` (logo, judul, tagline, pencarian
+   besar) lalu `pembuka-isi` yang memuat satu bagian "Tentang aplikasi ini".
+2. Bagian "Ke mana Anda pergi" dihapus dari `00-beranda.md` dan tidak muncul
+   lagi di teks halaman.
+3. Sidebar lebar 260 px dengan padding 12 px.
+4. Kategori dan Beranda: tinggi 40 px, huruf 14 px, bobot 600, ikon 18 px.
+   Menu anak: tinggi 32 px, huruf 13 px, bobot 400, ikon 15 px. Chevron 14 px.
+5. Menu anak menjorok 21 px dari kategori, padding kiri 12 px, garis pemandu
+   1 px di sisi kiri.
+6. Item aktif punya garis aksen 2 px (warna `rgb(37, 99, 235)`) yang menempel
+   pada garis pemandu, latar biru 15%, teks dan ikon biru terang.
+7. Atribut aksesibilitas: `aria-expanded` pada tombol kategori, `aria-controls`
+   menunjuk ke pembungkus daftar, `aria-current="page"` pada menu aktif, dan
+   `Beranda` tidak aktif ketika halaman lain dibuka.
+8. Kategori dengan anak aktif terbuka otomatis: saat membuka Laporan
+   Penjualan, grup Laporan terbuka (tinggi 32 px) dan grup Penjualan tetap
+   tertutup (tinggi 0 px, `inert`).
+9. Menu anak pada grup tertutup tidak dapat difokuskan.
+10. Item "Catatan Perubahan" tetap 40 px, huruf 16 px, ikon 18 px — tidak
+    diubah mengikuti gaya sidebar yang baru.
+11. Perbaikan terkait: aturan `[data-theme="dark"] a` kini mengecualikan
+    `.menu-item` karena sebelumnya menimpa warna hierarki sidebar.
+12. Lighthouse mode seluler di Beranda dan Login: aksesibilitas 100,
+    praktik terbaik 100, SEO 100, CLS 0, performa 98 sampai 100.
+
 Verifikasi sessionStorage eksplisit (7 skenario, semua lulus):
 `/?p=login&s=2` mengisi `mb:last` (`login`, langkah 2); `/?p=halaman-salah`
 tidak mengubah `mb:last`; refresh menampilkan pemulihan sesi (Login),
