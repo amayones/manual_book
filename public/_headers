@@ -1,0 +1,30 @@
+# Templat _headers untuk Cloudflare Pages.
+#
+# Berkas ini dibaca build, lalu dua penanda di baris Content-Security-Policy
+# diganti sesuai pengaturan. Keduanya hanya diisi ketika fitur Cloudflare Web
+# Analytics diaktifkan lewat content/config.mjs.
+# Hasil akhirnya ditulis ke dist/_headers.
+#
+# Catatan routing: aplikasi ini tidak memakai routing berbasis path. Address bar
+# selalu menunjuk ke root dan seluruh perpindahan halaman dikerjakan oleh
+# JavaScript. Cloudflare Pages menyajikan index.html untuk path apa pun yang
+# tidak dikenali, sehingga tidak ada berkas routing tambahan.
+#
+# Berkas data JSON memakai nama ber-hash isi seperti aset lain, sehingga aman
+# memakai Cache-Control immutable selama satu tahun.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: default-src 'self'; script-src 'self'{{TAMBAHAN_SKRIP}}; style-src 'self'; img-src 'self' data: https://i.ytimg.com; frame-src https://www.youtube-nocookie.com; connect-src 'self'{{TAMBAHAN_KONEKSI}}; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/*
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/json; charset=utf-8
+
+/
+  Cache-Control: public, max-age=0, must-revalidate

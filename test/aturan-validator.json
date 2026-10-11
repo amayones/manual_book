@@ -1,0 +1,239 @@
+{
+  "_catatan": "Setiap aturan aktif punya satu fixture di test/fixtures/invalid. Field berkas berisi nama berkas fixture, field salinFO berisi nama berkas tujuan di folder pages, field pesan berisi potongan pesan yang wajib muncul. Aturan 4 tidak punya fixture karena mustahil terjadi pada satu folder.",
+  "aturan": [
+    {
+      "nama": "01-tanpa-prefix",
+      "berkas": ["01-tanpa-prefix.md"],
+      "salinFO": ["login.md"],
+      "pesan": "nama file harus diawali 2 angka karena angka menentukan urutan sidebar"
+    },
+    {
+      "nama": "02-slug-tidak-valid",
+      "berkas": ["02-slug-tidak-valid.md"],
+      "salinFO": ["01-Login Baru.md"],
+      "pesan": "tidak valid. Gunakan huruf kecil, angka, dan tanda hubung"
+    },
+    {
+      "nama": "03-prefix-ganda",
+      "berkas": ["03a-prefix-ganda-a.md", "03b-prefix-ganda-b.md"],
+      "salinFO": ["01-uji.md", "01-uji-dua.md"],
+      "pesan": "dipakai ganda oleh 01-uji.md"
+    },
+    {
+      "nama": "05-id-dicadangkan",
+      "berkas": ["05-id-dicadangkan.md"],
+      "salinFO": ["01-changelog.md"],
+      "pesan": "id \"changelog\" dicadangkan untuk halaman sistem"
+    },
+    {
+      "nama": "06-tanpa-frontmatter",
+      "berkas": ["06-tanpa-frontmatter.md"],
+      "salinFO": ["01-tanpa-frontmatter.md"],
+      "pesan": "frontmatter tidak ditemukan. Baris pertama file harus"
+    },
+    {
+      "nama": "07-summary-kosong",
+      "berkas": ["07-summary-kosong.md"],
+      "salinFO": ["01-summary-kosong.md"],
+      "pesan": "field \"summary\" wajib diisi"
+    },
+    {
+      "nama": "07-title-kosong",
+      "berkas": ["07-title-kosong.md"],
+      "salinFO": ["01-title-kosong.md"],
+      "pesan": "field \"title\" wajib diisi"
+    },
+    {
+      "nama": "08-group-tidak-dikenal",
+      "berkas": ["08-group-tidak-dikenal.md"],
+      "salinFO": ["01-group-tidak-dikenal.md"],
+      "pesan": "tidak dikenal. Pilihan yang tersedia:"
+    },
+    {
+      "nama": "09-tanggal-format-salah",
+      "berkas": ["09-tanggal-format-salah.md"],
+      "salinFO": ["01-tanggal-format-salah.md"],
+      "pesan": "harus format YYYY-MM-DD, contoh 2026-09-28"
+    },
+    {
+      "nama": "10-tanggal-masa-depan",
+      "berkas": ["10-tanggal-masa-depan.md"],
+      "salinFO": ["01-tanggal-masa-depan.md"],
+      "pesan": "tidak boleh di masa depan"
+    },
+    {
+      "nama": "11-since-lebih-baru",
+      "berkas": ["11-since-lebih-baru.md"],
+      "salinFO": ["01-since-lebih-baru.md"],
+      "pesan": "tidak boleh lebih baru dari \"updated\""
+    },
+    {
+      "nama": "12-summary-panjang",
+      "berkas": ["12-summary-panjang.md"],
+      "salinFO": ["01-summary-panjang.md"],
+      "pesan": "terlalu panjang ("
+    },
+    {
+      "nama": "13-level-tidak-dikenal",
+      "berkas": ["13-level-tidak-dikenal.md"],
+      "salinFO": ["01-level-tidak-dikenal.md"],
+      "pesan": "tidak dikenal. Pilihan: Dasar, Menengah, Lanjut"
+    },
+    {
+      "nama": "14-icon-tidak-dikenal",
+      "berkas": ["14-icon-tidak-dikenal.md"],
+      "salinFO": ["01-icon-tidak-dikenal.md"],
+      "pesan": "tidak dikenal. Pilihan: rocket, grid"
+    },
+    {
+      "nama": "16-readtime-salah",
+      "berkas": ["16-readtime-salah.md"],
+      "salinFO": ["01-readtime-salah.md"],
+      "pesan": "tidak masuk akal. Kosongkan saja agar dihitung otomatis"
+    },
+    {
+      "nama": "17-featured-bukan-boolean",
+      "berkas": ["17-featured-bukan-boolean.md"],
+      "salinFO": ["01-featured-bukan-boolean.md"],
+      "pesan": "harus true atau false"
+    },
+    {
+      "nama": "19-langkah-tanpa-judul",
+      "berkas": ["19-langkah-tanpa-judul.md"],
+      "salinFO": ["01-langkah-tanpa-judul.md"],
+      "pesan": "tidak punya judul. Format: \"### 2. Judul langkah\""
+    },
+    {
+      "nama": "20a-langkah-tanpa-gambar",
+      "berkas": ["20a-langkah-tanpa-gambar.md"],
+      "salinFO": ["01-langkah-tanpa-gambar.md"],
+      "pesan": "tidak punya gambar screenshot"
+    },
+    {
+      "nama": "20b-langkah-dua-gambar",
+      "berkas": ["20b-langkah-dua-gambar.md"],
+      "salinFO": ["01-langkah-dua-gambar.md"],
+      "pesan": "gambar; setiap langkah memakai 1 gambar"
+    },
+    {
+      "nama": "21-tanpa-penjelasan",
+      "berkas": ["21-tanpa-penjelasan.md"],
+      "salinFO": ["01-tanpa-penjelasan.md"],
+      "pesan": "tidak ada teks penjelasan setelah gambar"
+    },
+    {
+      "nama": "22-gambar-tidak-ditemukan",
+      "berkas": ["22-gambar-tidak-ditemukan.md"],
+      "salinFO": ["01-gambar-tidak-ditemukan.md"],
+      "pesan": "gambar assets/uji/tidak-ada.png tidak ditemukan"
+    },
+    {
+      "nama": "23-tanpa-alt",
+      "berkas": ["23-tanpa-alt.md"],
+      "salinFO": ["01-tanpa-alt.md"],
+      "pesan": "gambar wajib punya alt text"
+    },
+    {
+      "nama": "25-pin-tanpa-gambar",
+      "berkas": ["25-pin-tanpa-gambar.md"],
+      "salinFO": ["01-pin-tanpa-gambar.md"],
+      "pesan": "harus diletakkan tepat setelah sebuah gambar"
+    },
+    {
+      "nama": "26-pin-tidak-urut",
+      "berkas": ["26-pin-tidak-urut.md"],
+      "salinFO": ["01-pin-tidak-urut.md"],
+      "pesan": "nomor pin harus urut 1, 2, 3..."
+    },
+    {
+      "nama": "27-koordinat-tak-terbaca",
+      "berkas": ["27-koordinat-tak-terbaca.md"],
+      "salinFO": ["01-koordinat-tak-terbaca.md"],
+      "pesan": "koordinat harus ditulis [x,y], contoh: [82,22]"
+    },
+    {
+      "nama": "28-koordinat-di-luar-rentang",
+      "berkas": ["28-koordinat-di-luar-rentang.md"],
+      "salinFO": ["01-koordinat-di-luar-rentang.md"],
+      "pesan": "di luar rentang 0-100. Koordinat adalah persen"
+    },
+    {
+      "nama": "29-callout-tidak-dikenal",
+      "berkas": ["29-callout-tidak-dikenal.md"],
+      "salinFO": ["01-callout-tidak-dikenal.md"],
+      "pesan": "tipe callout \"warning\" tidak dikenal. Gunakan: tip, warn, note"
+    },
+    {
+      "nama": "30-blok-belum-ditutup",
+      "berkas": ["30-blok-belum-ditutup.md"],
+      "salinFO": ["01-blok-belum-ditutup.md"],
+      "pesan": "belum ditutup. Tutup dengan \":::\" pada baris sendiri"
+    },
+    {
+      "nama": "31-video-tanpa-link",
+      "berkas": ["31-video-tanpa-link.md"],
+      "salinFO": ["01-video-tanpa-link.md"],
+      "pesan": "link YouTube tidak ditemukan"
+    },
+    {
+      "nama": "32-bukan-youtube",
+      "berkas": ["32-bukan-youtube.md"],
+      "salinFO": ["01-bukan-youtube.md"],
+      "pesan": "bukan tautan YouTube. Hanya YouTube yang didukung"
+    },
+    {
+      "nama": "33-id-youtube-salah",
+      "berkas": ["33-id-youtube-salah.md"],
+      "salinFO": ["01-id-youtube-salah.md"],
+      "pesan": "harus 11 karakter. Untuk contoh, pakai VIDEO_ID_CONTOH"
+    },
+    {
+      "nama": "34-durasi-tidak-valid",
+      "berkas": ["34-durasi-tidak-valid.md"],
+      "salinFO": ["01-durasi-tidak-valid.md"],
+      "pesan": "tidak valid. Gunakan \"2:15\" atau \"2 menit 15 detik\""
+    },
+    {
+      "nama": "35-bab-tidak-naik",
+      "berkas": ["35-bab-tidak-naik.md"],
+      "salinFO": ["01-bab-tidak-naik.md"],
+      "pesan": "Urutan bab harus naik"
+    },
+    {
+      "nama": "36-masalah-tanpa-penyebab",
+      "berkas": ["36-masalah-tanpa-penyebab.md"],
+      "salinFO": ["01-masalah-tanpa-penyebab.md"],
+      "pesan": "bagian \"Penyebab\" kosong"
+    },
+    {
+      "nama": "37-tanpa-langkah",
+      "berkas": ["37-tanpa-langkah.md"],
+      "salinFO": ["01-tanpa-langkah.md"],
+      "pesan": "tidak ada satu pun langkah"
+    },
+    {
+      "nama": "38-tautan-internal-salah",
+      "berkas": ["38-tautan-internal-salah.md"],
+      "salinFO": ["01-tautan-internal-salah.md"],
+      "pesan": "\"/laporan-tahuan\" tidak merujuk halaman yang ada"
+    },
+    {
+      "nama": "40-teks-terlalu-panjang",
+      "berkas": ["40-teks-terlalu-panjang.md"],
+      "salinFO": ["01-teks-terlalu-panjang.md"],
+      "pesan": "ringkasan terlalu panjang",
+      "peringatan": [
+        "judul langkah",
+        "penjelasan langkah punya lebih dari 40 kata",
+        "callout tip punya",
+        "Batas yang nyaman dibaca 100 karakter"
+      ]
+    },
+    {
+      "nama": "41-id-beranda-tercadangkan",
+      "berkas": ["41-id-beranda-tercadangkan.md"],
+      "salinFO": ["01-beranda.md"],
+      "pesan": "id \"beranda\" dicadangkan untuk halaman sistem dan hanya boleh dipakai oleh berkas \"00-beranda.md\""
+    }
+  ]
+}

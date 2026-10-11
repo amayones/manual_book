@@ -1,0 +1,132 @@
+# Daftar Uji Manual
+
+Pengujian otomatis ada di `npm test` (135 pengujian). Skenario browser
+otomatis (Playwright, Chromium headless, dijalankan dari luar proyek)
+mencakup M2, M3, dan M5 — hasilnya di bawah. Berkas ini berisi pemeriksaan
+manual untuk hal yang belum bisa diuji otomatis.
+
+## Sudah diverifikasi otomatis
+
+M2/M3 (43 skenario, semua lulus):
+URL selalu `/`, Back/Forward, refresh memulihkan posisi, deep link dan
+pembersihannya, halaman tidak dikenal beserta saran, pencarian dan `<mark>`,
+posisi pin pada 360 px dan 1440 px, tab, troubleshooting, callout, tombol
+salin dan toast, sidebar dan laci, tema, dan nol galat console.
+
+V1c (beranda jadi halaman, cari di navbar dan di beranda, tema dua mode,
+jendela yang bisa digeser), 48 skenario semuanya lulus: `/` membuka halaman
+Beranda; hero tidak ada lagi; pencarian di header menyatu setinggi 44 px di
+kanan navbar dan menyaring tanpa pindah halaman; pencarian besar di Beranda
+memakai panel hasilnya sendiri, tidak menyentuh panel navbar, panel disembunyikan
+bila tidak ada hasil; `Ctrl+K` dan garis miring memfokuskan pencarian; judul
+halaman tidak menampilkan cincin fokus; tema hanya `light` dan `dark` dan
+pilihan bertahan setelah muat ulang; tidak ada nilai `auto` di halaman; menu
+Beranda di paling atas sidebar; tidak ada baris "Lanjutkan" maupun "Riwayat";
+bintang pada dua halaman featured; jendela punya dua tombol ikon saja dengan
+nama aksesibel "Perbesar ke layar penuh" dan "Tutup"; tombol "Ukuran asli"
+tidak ada dan gambar otomatis pas layar; maximize mengisi layar dan Esc
+memulihkan sebelum menutup; jendela bisa digeser lewat judul dan tidak pernah
+keluar layar; tutup mengembalikan fokus ke tombol pemicu; tautan tanpa `p`
+memulihkan posisi baca terakhir dari `sessionStorage`.
+
+M4/M5/M6 — skenario tambahan (35 skenario, semua lulus):
+1. Lightbox terbuka dari tombol gambar; penghitung "1 / 3" dan judul langkah
+   tampil; lapisan pin ikut tampil (3 pin pada langkah 1).
+2. Panah berikutnya/sebelumnya dan panah keyboard berpindah gambar.
+3. Esc menutup; fokus kembali ke tombol pemicu.
+4. Zoom berganti label menjadi "Pas layar".
+5. Daftar isi tampil di 1280 px (6 item: Sebelum mulai + 3 langkah +
+   Hasil akhir + Masalah); menyorot item yang dibaca; klik menggulir;
+   disembunyikan di bawah 1200 px.
+6. `?p=changelog` membuka Catatan Perubahan dari `content/changelog.md`;
+   URL dibersihkan; Back/Forward berfungsi; tautan sidebar berfungsi.
+7. Deep link `tab=video&s=2` membuka tab Video; `s=2` di luar 1 video
+   diabaikan tanpa sorot; `s=1` menyorot video pertama dan fokus ke judulnya.
+8. Setiap video punya tombol salin link video.
+9. Video ber-ID valid (`aaaaaaaaaaa`): thumbnail tampil, iframe belum ada
+   sebelum diklik, klik membuat iframe `youtube-nocookie.com/embed/...`
+   dengan `enablejsapi=1` dan `autoplay=1`, klik bab memanggil postMessage
+   `seekTo` dengan detik yang benar ke iframe yang sama. Pemutaran YouTube
+   sungguhan belum diuji (butuh jaringan dan akun).
+10. `prefers-reduced-motion: reduce` terdeteksi; durasi animasi kartu `0s`.
+11. Lebar 320 px: kelebihan 0 px (tidak ada scroll horizontal).
+12. Tema dark (`rgb(10, 15, 26)`) dan light (`rgb(246, 247, 251)`) diterapkan.
+13. Nol pelanggaran CSP dan galat (tiga 404 yang tercatat hanya
+    `/favicon.ico` bawaan browser dan `/__dev/reload` pada server uji
+    statis; keduanya jinak dan dijelaskan di laporan).
+
+Verifikasi sessionStorage eksplisit (7 skenario, semua lulus):
+`/?p=login&s=2` mengisi `mb:last` (`login`, langkah 2); `/?p=halaman-salah`
+tidak mengubah `mb:last`; refresh menampilkan pemulihan sesi (Login),
+bukan layar galat; URL tetap bersih.
+
+Lighthouse (Chromium sistem, `npx lighthouse`, tanpa menambah dependensi):
+Performance 96, Accessibility 96, Best Practices 96. CLS 0.152 —
+satu-satunya penurun skor adalah footer yang bergeser saat kartu beranda
+dimuat (di bawah fold). Hero sudah pra-render di build untuk menekan ini.
+
+Rasio kontras (`node scripts/kontras.mjs`): 27 pasangan warna LULUS pada
+batas 4.5:1, tema terang dan gelap, termasuk aksen, callout, lencana, pin,
+dan toast. Nilai terendah: 4.51:1 (lencana Diperbarui, terang) dan 4.57:1
+(lencana Baru, terang).
+
+## Perintah yang sudah berjalan tanpa error
+
+1. `npm install` lalu `npm run dev` berjalan tanpa error.
+2. `npm run build` menghasilkan folder `dist/` berisi `index.html`, `_headers`,
+   JavaScript, CSS, dan berkas JSON yang namanya memuat hash isi.
+3. `npm run validate` melaporkan jumlah halaman, langkah, video, dan masalah.
+4. `npm run size` menampilkan ukuran gzip setiap berkas di dalam anggaran
+   (app.js 11.3/22 KB, styles.css 5.9/12 KB, theme-boot 0.5/1 KB,
+   index.html 3.7/6 KB).
+5. `npm test`: 135 pengujian lulus.
+6. `node scripts/kontras.mjs`: 27 pasangan warna lulus pada 4.5:1.
+7. Lighthouse (Chromium, localhost): median performa 99, aksesibilitas 100,
+   praktik terbaik 96, SEO 100, CLS 0. Angka 96 itu hanya karena probe
+   muat-ulang `/__dev/reload` yang aktif di localhost saling jawab 404;
+   saat diukur tanpa probe itu (host selain localhost) skornya 100.
+
+Skenario browser perlu dijalankan ulang setiap kali `src/` berubah.
+
+## Perlu diuji manual
+
+### Setelah deploy ke Cloudflare Pages
+
+- Periksa header jawaban memakai `curl -I`:
+  - `/assets/app.<hash>.js` dan `/data/id.<hash>.json` harus memuat
+    `Cache-Control: public, max-age=31536000, immutable`.
+  - `/` harus memuat `Cache-Control: public, max-age=0, must-revalidate`.
+  - Tidak boleh ada `script-src 'unsafe-inline'` atau `style-src 'unsafe-inline'`.
+- Ketik `manual.domain.com/login` langsung di address bar. Sampaikan hasilnya:
+  bila muncul 404 bawaan Pages, berarti perilaku "Pages menyajikan index.html
+  untuk path apa pun" tidak terjadi dan perlu penanganan `404.html` pada M7.
+- Muat `/?p=login&s=2` dari tab baru dan pastikan JSON yang dipakai selalu
+  versi terbaru setelah konten diperbarui (buka DevTools, nonaktifkan cache,
+  periksa nama berkas JSON di tab Network).
+
+### Browser dan perangkat
+
+- Safari dan Firefox versi terbaru: klik, tab, pencarian, video, lightbox.
+- iOS Safari: laci menu, pin, tema, dan gestur geser lightbox.
+- Android Chrome: sentuh lingkaran pin dengan jari, cek tooltip muncul
+  (area sentuh 44 px, lingkaran visual 28 px).
+- Throttle "Slow 3G": hero statis langsung tampil sebelum data datang.
+
+### Gerak dan aksesibilitas
+
+- Setelan sistem "kurangi gerak" aktif: tidak ada animasi dan gulir langsung.
+- Hanya keyboard: Tab/Shift+Tab, panah pada tab, panah atas/bawah+Enter/Esc di
+  pencarian, Escape menutup laci, fokus selalu terlihat.
+- Lighthouse sudah dijalankan lokal (96/96/96, CLS 0.125). Setelah deploy,
+  jalankan ulang dan pastikan tidak turun; CLS idealnya mendekati nol.
+- Pembaca layar (NVDA atau VoiceOver): tab, daftar masalah, jumlah hasil
+  pencarian, toast, dialog lightbox, dan daftar isi.
+
+### Video YouTube
+
+Untuk saat ini hanya ada kartu contoh `VIDEO_ID_CONTOH`.
+Setelah ada video asli:
+- Klik tombol putar: iframe `youtube-nocookie.com/embed/...&enablejsapi=1`
+  hanya muncul setelah diklik.
+- Klik sebuah bab: video melompat ke detik yang benar tanpa iframe dimuat ulang.
+- Di HP, putaran video berhenti saat tab diganti (perilaku iframe dihapus).

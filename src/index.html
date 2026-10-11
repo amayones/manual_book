@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="id" data-theme="light" data-base="{{BASE_PATH}}" data-json="{{DATA_JSON}}" data-json-semua="{{DATA_JSON_SEMUA}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{TITLE}} - {{APP_NAME}}</title>
+<meta name="description" content="{{APP_DESCRIPTION}}">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{APP_DESCRIPTION}}">
+<meta property="og:type" content="website">
+<link rel="icon" href="{{FAVICON}}" type="image/svg+xml">
+<script src="{{THEME_BOOT}}"></script>
+<link rel="stylesheet" href="{{APP_CSS}}">
+</head>
+<body>
+<a class="lewati-ke-isi" href="#isi">Lewati ke isi</a>
+
+{{SPRITE}}
+
+<header class="bilah-atas">
+  <button class="tombol-menu" type="button" data-action="buka-laci" aria-expanded="false" aria-controls="laci" aria-label="Buka menu">
+    <svg class="ikon" aria-hidden="true" focusable="false"><use href="#i-ui-menu"></use></svg>
+    <span class="tombol-teks">Menu</span>
+  </button>
+  <a class="merek" href="/" data-action="ke-beranda">
+    <span class="merek-teks">{{LOGO_TEXT}}</span>
+    <span class="merek-nama">{{TITLE}}</span>
+  </a>
+  <form class="cari-navbar" role="search" aria-label="Cari di manual">
+    <span class="cari-ikon" aria-hidden="true">
+      <svg class="ikon" focusable="false"><use href="#i-ui-search"></use></svg>
+    </span>
+    <input class="cari-input" id="kotak-cari" type="search" autocomplete="off" role="combobox"
+      aria-expanded="false" aria-autocomplete="list" aria-haspopup="listbox"
+      placeholder="Cari halaman atau langkah">
+    <div class="cari-hasil" id="cari-hasil" role="listbox" hidden></div>
+    <p class="cari-status" id="cari-status" role="status" aria-live="polite"></p>
+  </form>
+  <nav class="bilah-navigasi" aria-label="Navigasi utama">
+    <button class="tombol-tema" type="button" data-action="ganti-tema" aria-label="Ganti ke tema gelap" title="Ganti tema">
+      <svg class="ikon" aria-hidden="true" focusable="false"><use id="ikon-tema" href="#i-ui-moon"></use></svg>
+    </button>
+  </nav>
+</header>
+
+<div class="tirai" data-action="tutup-laci" hidden></div>
+
+<nav class="laci" id="laci" aria-label="Daftar halaman" inert>
+  <div class="laci-kepala">
+    <p class="laci-judul">Halaman</p>
+    <button class="tombol-tutup-laci" type="button" data-action="tutup-laci" aria-label="Tutup menu">
+      <svg class="ikon" aria-hidden="true" focusable="false"><use href="#i-ui-close"></use></svg>
+      <span class="tombol-teks">Tutup</span>
+    </button>
+  </div>
+  <div class="laci-isi" id="laci-isi"></div>
+  <div class="laci-kaki">
+    <p class="laci-kaki-nama">{{APP_NAME}}</p>
+    <a class="laci-kaki-tautan" href="/" data-action="ke-atas" aria-label="Kembali ke atas">
+      <svg class="ikon" aria-hidden="true" focusable="false"><use href="#i-ui-arrow-up"></use></svg>
+    </a>
+  </div>
+</nav>
+
+<main id="isi" class="wadah" tabindex="-1">
+  <div class="kerangka skelet" aria-hidden="true">
+    <div class="skelet-judul"></div>
+    <div class="skelet-baris"></div>
+    <div class="skelet-baris skelet-baris-pendek"></div>
+  </div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<dialog class="cahaya" id="cahaya" aria-labelledby="cahaya-judul">
+  <div class="cahaya-kepala" id="cahaya-kepala">
+    <span class="cahaya-grip" aria-hidden="true"></span>
+    <p class="cahaya-judul" id="cahaya-judul"></p>
+    <p class="cahaya-hitung" id="cahaya-hitung" aria-live="polite"></p>
+    <div class="cahaya-aksi">
+      <button class="jendela-tombol" type="button" data-action="cahaya-maks" id="cahaya-maks"
+        aria-label="Perbesar ke layar penuh" title="Perbesar ke layar penuh">
+        <svg class="ikon" aria-hidden="true" focusable="false"><use id="ikon-maks" href="#i-ui-maximize"></use></svg>
+      </button>
+      <button class="jendela-tombol jendela-tombol-tutup" type="button" data-action="cahaya-tutup"
+        aria-label="Tutup" title="Tutup">
+        <svg class="ikon" aria-hidden="true" focusable="false"><use href="#i-ui-close"></use></svg>
+      </button>
+    </div>
+  </div>
+  <div class="cahaya-badan">
+    <button class="cahaya-panah cahaya-sebelumnya" type="button" data-action="cahaya-sebelumnya" aria-label="Gambar sebelumnya"><span class="cahaya-panah-tanda" aria-hidden="true"></span></button>
+    <div class="cahaya-isi" id="cahaya-isi"></div>
+    <button class="cahaya-panah cahaya-berikutnya" type="button" data-action="cahaya-berikutnya" aria-label="Gambar berikutnya"><span class="cahaya-panah-tanda" aria-hidden="true"></span></button>
+  </div>
+</dialog>
+
+<footer class="kaki">
+  <p class="kaki-nama">{{APP_NAME}}</p>
+  <a class="kaki-tautan" href="/" data-action="ke-atas" aria-label="Kembali ke atas" title="Kembali ke atas">
+    <svg class="ikon" aria-hidden="true" focusable="false"><use href="#i-ui-arrow-up"></use></svg>
+  </a>
+</footer>
+
+<script src="{{APP_JS}}" defer></script>
+{{ANALYTICS}}
+</body>
+</html>
