@@ -360,10 +360,6 @@ h1[tabindex="-1"]:focus-visible { outline: none; }
 
 .menu-item-teks { flex: 1; }
 
-/* Tanda halaman unggulan (featured) di sisi kanan item. */
-.menu-item-bintang { color: var(--aksen-tulis); flex: none; }
-.menu-item-bintang .ikon { width: 0.95rem; height: 0.95rem; }
-
 .menu-item-aktif {
   background: var(--aksen-lembut);
   color: var(--aksen-tulis);
@@ -902,14 +898,6 @@ mark {
   color: var(--teks);
 }
 
-.sebelum-mulai .kotak-judul,
-.hasil-akhir .kotak-judul {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: var(--t-isi);
-}
-
 .kotak > :last-child { margin-bottom: 0; }
 
 /* -------------------------------------------------------------------- tab */
@@ -1153,52 +1141,6 @@ mark {
 .callout-note { border-color: var(--aksen); }
 .callout-note .callout-judul { color: var(--aksen-tulis); }
 
-/* ---------------------------------------------------------------- masalah */
-
-.masalah {
-  background: var(--kartu-2);
-  border: 1px solid var(--garis);
-  border-radius: var(--sudut-kecil);
-  margin-bottom: 0.5rem;
-}
-
-.masalah-ringkas {
-  display: flex;
-  gap: 0.6rem;
-  align-items: baseline;
-  padding: 0.7rem 0.9rem;
-  cursor: pointer;
-  min-height: 44px;
-  font-size: var(--t-isi);
-}
-
-.masalah-label {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: var(--t-kecil);
-  font-weight: 600;
-  color: var(--galat);
-}
-
-.masalah-label .ikon,
-.masalah-nama .ikon { width: 1.1rem; height: 1.1rem; }
-
-.masalah-isi { padding: 0 0.9rem 0.6rem; }
-.masalah-baris + .masalah-baris { margin-top: 0.5rem; }
-.masalah-nama {
-  margin: 0 0 0.15rem;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: var(--t-kecil);
-  font-weight: 600;
-  color: var(--teks-lembut);
-}
-
-.masalah-teks { max-width: 68ch; }
-.masalah-teks > :last-child { margin-bottom: 0; }
 
 /* ------------------------------------------------------------------ video */
 

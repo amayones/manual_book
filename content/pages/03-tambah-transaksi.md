@@ -6,18 +6,9 @@ summary: Cara mencatat transaksi penjualan baru sampai tersimpan.
 icon: cart
 level: Menengah
 tags: [transaksi, tambah, form, simpan]
-featured: true
 # Contoh tanpa badge: since sengaja dikosongkan dan updated sudah lama
 # (2026-07-15, lebih dari 45 hari dari 2026-10-10).
 ---
-
-## Sebelum mulai
-
-Siapkan nama pelanggan, nama produk, jumlah, dan harga satuan.
-
-## Hasil akhir
-
-Transaksi baru tersimpan sebagai baris teratas berstatus Baru.
 
 ## Panduan
 
@@ -69,20 +60,6 @@ Baris teratas (nomor 1) berstatus Baru.
 
 ::: tip
 Statusnya menjadi Lunas setelah pembayaran dicatat.
-:::
-
-## Troubleshooting
-
-::: problem
-**Masalah:** Tombol Simpan tidak bisa diklik.
-**Penyebab:** Kolom harga masih kosong.
-**Solusi:** Isi kolom harga, tombol Simpan akan aktif.
-:::
-
-::: problem
-**Masalah:** Transaksi yang sama tercatat dua kali.
-**Penyebab:** Tombol Simpan ditekan dua kali saat koneksi lambat.
-**Solusi:** Hapus salah satu lewat menu titik tiga pada baris transaksi.
 :::
 
 ## Video

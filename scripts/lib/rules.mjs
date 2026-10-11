@@ -12,7 +12,7 @@ import { NAMA_IKON } from './icons.mjs';
 import { CALLOUT, PLACEHOLDER_ID, parsePin, parseUrlYoutube } from './directives.mjs';
 import { hitungKata } from './readtime.mjs';
 
-export const TIPE_BLOK = ['pin', 'tip', 'warn', 'note', 'problem', 'video'];
+export const TIPE_BLOK = ['pin', 'tip', 'warn', 'note', 'video'];
 export const TIPE_CALLOUT = Object.keys(CALLOUT);
 export const LEVEL = ['Dasar', 'Menengah', 'Lanjut'];
 
@@ -363,19 +363,6 @@ function formatPendek(daftar, detik) {
   return cocok ? cocok.waktu : String(detik);
 }
 
-/** Aturan 36: blok problem. */
-export function validasiProblem(file, problem, nomor) {
-  const hasil = [];
-  for (const bagian of ['masalah', 'penyebab', 'solusi']) {
-    const nama = bagian[0].toUpperCase() + bagian.slice(1);
-    if (!problem[bagian] || !String(problem[bagian]).trim()) {
-      hasil.push(masalah(file, problem.baris[bagian] || problem.baris.masalah, `masalah ${nomor}`,
-        `bagian "${nama}" kosong. Format: **${nama}:** ...`));
-    }
-  }
-  return hasil;
-}
-
 /** Aturan 38: tautan internal harus menuju halaman yang ada. */
 export function validasiTautanInternal(daftarHalaman) {
   const hasil = [];
@@ -468,11 +455,9 @@ export function validasiAdaLangkah(daftarHalaman) {
 export function ringkasPemakaian(daftarHalaman) {
   let langkah = 0;
   let video = 0;
-  let masalah = 0;
   for (const h of daftarHalaman) {
     langkah += (h.langkah ?? []).length;
     video += (h.videos ?? []).length;
-    masalah += (h.problems ?? []).length;
   }
-  return { halaman: daftarHalaman.length, langkah, video, masalah };
+  return { halaman: daftarHalaman.length, langkah, video };
 }

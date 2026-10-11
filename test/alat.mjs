@@ -53,14 +53,6 @@ summary: Halaman induk untuk pengujian.
 ![Gambar induk](/assets/induk/step-1.png)
 Penjelasan singkat halaman induk.
 
-## Troubleshooting
-
-::: problem
-**Masalah:** Gejala.
-**Penyebab:** Penyebab.
-**Solusi:** Solusi.
-:::
-
 ## Video
 
 ::: video

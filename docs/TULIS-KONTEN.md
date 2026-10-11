@@ -49,7 +49,8 @@ level: Menengah     # Dasar, Menengah, atau Lanjut. Tidak lagi ditampilkan
 readTime: 5         # Kosong berarti dihitung otomatis dari panjang teks.
                     # Tidak lagi ditampilkan di layar.
 tags: [masuk, akun] # Kata kunci untuk pencarian
-featured: true      # Halaman ini dapat bintang di sidebar
+featured: true      # Halaman unggulan. Tidak lagi menampilkan bintang di
+                    # sidebar; field ini boleh dihapus.
 since: 2026-09-01   # Tanggal halaman pertama dibuat. Wajib diisi agar badge
                       # "Baru" bisa tampil; bila kosong, halaman tidak pernah "Baru".
 ```
@@ -61,13 +62,13 @@ since: 2026-09-01   # Tanggal halaman pertama dibuat. Wajib diisi agar badge
 
 ## 3. Isi halaman
 
-Gunakan heading `##` untuk membagi bagian. Lima bagian berikut punya arti
-khusus: `## Sebelum mulai`, `## Hasil akhir`, `## Panduan`, `## Troubleshooting`,
-dan `## Video`.
+Gunakan heading `##` untuk membagi bagian. Dua bagian punya arti khusus:
+`## Panduan` dan `## Video`. Bagian lain apa pun (misalnya
+`## Tentang aplikasi ini`) menjadi teks biasa dan ikut terbaca oleh
+pencarian.
 
-Halaman Beranda boleh dibuat lebih sederhana: cukup bagian `## Sebelum mulai`,
-`## Hasil akhir`, `## Panduan`, dan `## Troubleshooting`. Bilah tab disembunyikan
-otomatis bila halaman tidak punya video.
+Halaman Beranda boleh dibuat lebih sederhana: cukup bagian `## Panduan`.
+Bilah tab disembunyikan otomatis bila halaman tidak punya video.
 
 ### Langkah
 
@@ -202,9 +203,8 @@ panjang. Batas yang nyaman:
 | Judul langkah | 8 kata |
 | Penjelasan tiap langkah | 40 kata, tanpa paragraf kedua |
 | Isi satu callout | 25 kata |
-| Setiap bagian troubleshooting | satu kalimat |
 
-Contoh sebelum dan sesudah untuk bagian `## Sebelum mulai`:
+Contoh sebelum dan sesudah untuk awal langkah:
 
 ```markdown
 Sebelum (terlalu panjang):

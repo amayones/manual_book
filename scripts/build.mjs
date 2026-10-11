@@ -101,7 +101,7 @@ async function main() {
   }
   const total = ringkasPemakaian(daftar);
   process.stdout.write(`   ${total.halaman} halaman, ${total.langkah} langkah, `
-    + `${total.video} video, ${total.masalah} masalah troubleshooting\n`);
+    + `${total.video} video\n`);
 
   judul('3. Render HTML');
   const dataBahasa = {};

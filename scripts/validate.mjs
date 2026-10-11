@@ -43,8 +43,7 @@ if (KETAT && peringatan.length && galat.length === 0) {
 
 const adaKendala = galat.length > 0 || (KETAT && peringatan.length > 0);
 process.stdout.write(
-  `Ringkasan: ${total.halaman} halaman, ${total.langkah} langkah, ${total.video} video, `
-  + `${total.masalah} masalah troubleshooting.\n`,
+  `Ringkasan: ${total.halaman} halaman, ${total.langkah} langkah, ${total.video} video.\n`,
 );
 process.stdout.write(
   `${galat.length} kesalahan, ${peringatan.length} peringatan.\n`

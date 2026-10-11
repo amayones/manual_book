@@ -10,8 +10,8 @@ manual untuk hal yang belum bisa diuji otomatis.
 M2/M3 (43 skenario, semua lulus):
 URL selalu `/`, Back/Forward, refresh memulihkan posisi, deep link dan
 pembersihannya, halaman tidak dikenal beserta saran, pencarian dan `<mark>`,
-posisi pin pada 360 px dan 1440 px, tab, troubleshooting, callout, tombol
-salin dan toast, sidebar dan laci, tema, dan nol galat console.
+posisi pin pada 360 px dan 1440 px, tab, callout, tombol salin dan toast,
+sidebar dan laci, tema, dan nol galat console.
 
 V1c (beranda jadi halaman, cari di navbar dan di beranda, tema dua mode,
 jendela yang bisa digeser), 48 skenario semuanya lulus: `/` membuka halaman
@@ -22,7 +22,7 @@ bila tidak ada hasil; `Ctrl+K` dan garis miring memfokuskan pencarian; judul
 halaman tidak menampilkan cincin fokus; tema hanya `light` dan `dark` dan
 pilihan bertahan setelah muat ulang; tidak ada nilai `auto` di halaman; menu
 Beranda di paling atas sidebar; tidak ada baris "Lanjutkan" maupun "Riwayat";
-bintang pada dua halaman featured; jendela punya dua tombol ikon saja dengan
+bintang tidak lagi tampil di sidebar; jendela punya dua tombol ikon saja dengan
 nama aksesibel "Perbesar ke layar penuh" dan "Tutup"; tombol "Ukuran asli"
 tidak ada dan gambar otomatis pas layar; maximize mengisi layar dan Esc
 memulihkan sebelum menutup; jendela bisa digeser lewat judul dan tidak pernah
@@ -35,9 +35,9 @@ M4/M5/M6 — skenario tambahan (35 skenario, semua lulus):
 2. Panah berikutnya/sebelumnya dan panah keyboard berpindah gambar.
 3. Esc menutup; fokus kembali ke tombol pemicu.
 4. Zoom berganti label menjadi "Pas layar".
-5. Daftar isi tampil di 1280 px (6 item: Sebelum mulai + 3 langkah +
-   Hasil akhir + Masalah); menyorot item yang dibaca; klik menggulir;
-   disembunyikan di bawah 1200 px.
+5. Daftar isi tampil di 1280 px (3 item: tiga langkah Login) setelah blok
+   "Sebelum mulai", "Hasil akhir", dan "Masalah" dihapus; menyorot item
+   yang dibaca; klik menggulir; disembunyikan di bawah 1200 px.
 6. `?p=changelog` membuka Catatan Perubahan dari `content/changelog.md`;
    URL dibersihkan; Back/Forward berfungsi; tautan sidebar berfungsi.
 7. Deep link `tab=video&s=2` membuka tab Video; `s=2` di luar 1 video
@@ -122,7 +122,7 @@ dan toast. Nilai terendah: 4.51:1 (lencana Diperbarui, terang) dan 4.57:1
 1. `npm install` lalu `npm run dev` berjalan tanpa error.
 2. `npm run build` menghasilkan folder `dist/` berisi `index.html`, `_headers`,
    JavaScript, CSS, dan berkas JSON yang namanya memuat hash isi.
-3. `npm run validate` melaporkan jumlah halaman, langkah, video, dan masalah.
+3. `npm run validate` melaporkan jumlah halaman, langkah, dan video.
 4. `npm run size` menampilkan ukuran gzip setiap berkas di dalam anggaran
    (app.js 11.3/22 KB, styles.css 5.9/12 KB, theme-boot 0.5/1 KB,
    index.html 3.7/6 KB).
@@ -167,8 +167,8 @@ Skenario browser perlu dijalankan ulang setiap kali `src/` berubah.
 - Lighthouse sudah dijalankan lokal (99/100/100/100, CLS 0 di mode seluler).
   Setelah deploy, jalankan ulang dan pastikan tidak turun; CLS idealnya
   mendekati nol.
-- Pembaca layar (NVDA atau VoiceOver): tab, daftar masalah, jumlah hasil
-  pencarian, toast, dialog lightbox, dan daftar isi.
+- Pembaca layar (NVDA atau VoiceOver): tab, jumlah hasil pencarian, toast,
+  dialog lightbox, dan daftar isi.
 
 ### Video YouTube
 

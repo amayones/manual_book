@@ -90,7 +90,7 @@ icon: lock                         # opsional: salah satu dari 22 nama ikon
 level: Dasar                       # opsional: Dasar, Menengah, Lanjut
 readTime: 5                        # opsional: kosong berarti dihitung otomatis
 tags: [masuk, akun]                # opsional: kata kunci pencarian
-featured: true                     # opsional: dapat bintang di sidebar
+featured: true                     # opsional: tidak lagi menampilkan bintang
 since: 2026-09-01                  # tanggal halaman pertama dibuat; wajib diisi agar badge "Baru" tampil
 ---
 ```
@@ -148,16 +148,6 @@ Tulisan catatan.
 
 Hanya tiga tipe itu. Setiap blok wajib ditutup dengan `:::` pada baris sendiri.
 
-### Troubleshooting
-
-```markdown
-::: problem
-**Masalah:** Gejala yang dilihat pengguna.
-**Penyebab:** Penyebab sebenarnya.
-**Solusi:** Langkah penyelesaian.
-:::
-```
-
 ### Video dan bab
 
 ```markdown
@@ -191,9 +181,6 @@ tagline: 'Apa yang ingin Anda lakukan?',  // kalimat di kotak pencarian header
 theme: {
   accent: '#2563eb',          // warna utama tombol, tautan, sorotan
   accentDark: '#60a5fa',      // warna aksen saat mode gelap
-},
-sidebar: {
-  markFeatured: true,         // bintang pada halaman featured
 },
 groups: [
   // Halaman Beranda (00-beranda.md) memakai group: none sehingga tidak
@@ -398,6 +385,18 @@ Tombol Menu di navbar memakai latar warna aksen dengan ikon lebih besar
 daripada tulungannya, supaya jelas terbaca sebagai kontrol buka/tutup dan
 tidak tertukar dengan tombol tema. Tombol Tutup di dalam menu geser memakai
 gaya yang sama.
+
+## Isi halaman
+
+Setiap halaman hanya punya dua bagian: `## Panduan` (langkah demi langkah)
+dan `## Video`. Blok "Sebelum mulai", "Hasil akhir", dan "Masalah yang sering
+terjadi" sudah dihapus beserta fitur authoring-nya, karena penjelasannya
+sudah ada di langkah pertama dan di video — supaya manual tidak terlihat
+berulang-ulang.
+
+Sidebar tidak lagi menandai halaman unggulan dengan bintang, jadi field
+`featured` pada frontmatter boleh dihapus; validator tetap menerimanya kalau
+masih ada.
 
 ## Status milestone
 

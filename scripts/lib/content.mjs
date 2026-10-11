@@ -13,7 +13,6 @@ import {
   pecahBagian,
   pecahBlok,
   parseLangkah,
-  parseProblem,
   parseVideo,
 } from './directives.mjs';
 import {
@@ -29,7 +28,6 @@ import {
   validasiNamaBerkas,
   validasiPanjangTeks,
   validasiPin,
-  validasiProblem,
   validasiLangkah,
   validasiTautanInternal,
   validasiVideo,
@@ -37,7 +35,6 @@ import {
 
 const JUDUL_BAGIAN_PANDUAN = 'panduan';
 const JUDUL_BAGIAN_VIDEO = 'video';
-const JUDUL_BAGIAN_MASALAH = 'troubleshooting';
 
 function namaBagianSama(judul, bandingkan) {
   return String(judul ?? '').trim().toLowerCase() === bandingkan;
@@ -62,7 +59,6 @@ export function bacaHalaman({ akarProyek, config, kodeBahasa, folder, namaBerkas
       bagian: [],
       langkah: [],
       videos: [],
-      problems: [],
     };
   }
 
@@ -75,7 +71,6 @@ export function bacaHalaman({ akarProyek, config, kodeBahasa, folder, namaBerkas
   const bagian = pecahBagian(body, barisAwalBody);
   const bagianPanduan = bagian.find((b) => namaBagianSama(b.judul, JUDUL_BAGIAN_PANDUAN));
   const bagianVideo = bagian.find((b) => namaBagianSama(b.judul, JUDUL_BAGIAN_VIDEO));
-  const bagianMasalah = bagian.find((b) => namaBagianSama(b.judul, JUDUL_BAGIAN_MASALAH));
 
   const langkah = bagianPanduan
     ? parseLangkah(bagianPanduan.isi, bagianPanduan.barisIsi)
@@ -85,11 +80,6 @@ export function bacaHalaman({ akarProyek, config, kodeBahasa, folder, namaBerkas
   const videos = blokVideo
     .filter((b) => b.tipe === 'video')
     .map((b) => parseVideo(b.isi, b.barisIsi));
-
-  const blokMasalah = bagianMasalah ? pecahBlok(bagianMasalah.isi, bagianMasalah.barisIsi) : [];
-  const problems = blokMasalah
-    .filter((b) => b.tipe === 'problem')
-    .map((b) => parseProblem(b.isi, b.barisIsi));
 
   const kata = hitungKata(buangBlok(body));
   // group: none berarti halaman tidak masuk grup mana pun (mis. halaman Beranda).
@@ -111,7 +101,6 @@ export function bacaHalaman({ akarProyek, config, kodeBahasa, folder, namaBerkas
     bagian,
     langkah,
     videos,
-    problems,
     kata,
     readTime: hitungReadTime({ kata, langkah: langkah.length }),
     group: fm.group,
@@ -195,7 +184,6 @@ export function validasiSemua(daftarHalaman, { config, akarProyek }) {
       galat.push(...validasiBlok(halaman.file, langkah));
     }
     halaman.videos.forEach((video, i) => galat.push(...validasiVideo(halaman.file, video, i + 1)));
-    halaman.problems.forEach((problem, i) => galat.push(...validasiProblem(halaman.file, problem, i + 1)));
   }
 
   galat.push(...validasiTautanInternal(daftarHalaman));
@@ -207,7 +195,7 @@ export function validasiSemua(daftarHalaman, { config, akarProyek }) {
 }
 
 /**
- * Memeriksa blok ::: di luar langkah, misalnya blok video dan blok problem.
+ * Memeriksa blok ::: di luar langkah, misalnya blok video.
  * Blok di dalam langkah diperiksa oleh validasiBlok per langkah.
  */
 function validasiBlokTubuh(halaman) {

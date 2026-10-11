@@ -6,18 +6,9 @@ summary: Cara masuk ke aplikasi memakai email dan kata sandi.
 icon: lock
 level: Dasar
 tags: [masuk, akun, password]
-featured: true
 # Contoh badge "Baru": since diisi 2026-09-25 (dalam 30 hari dari 2026-10-10).
 since: 2026-09-25
 ---
-
-## Sebelum mulai
-
-Siapkan email aktivasi dan kata sandi yang Anda buat saat mendaftar.
-
-## Hasil akhir
-
-Anda masuk dan melihat Dashboard milik akun Anda sendiri.
 
 ## Panduan
 
@@ -54,20 +45,6 @@ Centang **Ingat saya** (nomor 1) agar tidak perlu mengetik ulang di perangkat in
 
 ::: note
 Pengaturan ini tersimpan di browser, bukan di akun Anda.
-:::
-
-## Troubleshooting
-
-::: problem
-**Masalah:** Muncul pesan "Email atau kata sandi salah".
-**Penyebab:** Ada spasi di akhir email yang ikut tersalin.
-**Solusi:** Tempel ulang email tanpa spasi, atau pilih Lupa kata sandi.
-:::
-
-::: problem
-**Masalah:** Aplikasi berputar lalu kembali ke halaman login.
-**Penyebab:** Sesi di server habis setelah 30 menit.
-**Solusi:** Login ulang dan aktifkan Ingat saya.
 :::
 
 ## Video

@@ -122,12 +122,11 @@ function buangSemuaBlok(langkah) {
 
 /** Merakit HTML satu halaman untuk sebuah bahasa. */
 export function renderHalaman(halaman, config) {
-  const bagianLain = halaman.bagian.filter((b) => !['panduan', 'video', 'troubleshooting'].includes(b.judul.trim().toLowerCase()));
+  const bagianLain = halaman.bagian.filter((b) => !['panduan', 'video'].includes(b.judul.trim().toLowerCase()));
 
   const langkahHtml = halaman.langkah.map((l) => renderLangkah(halaman, l, config)).join('\n');
 
   const videoHtml = halaman.videos.map((video, i) => renderVideo(video, i + 1, halaman.id)).join('\n');
-  const masalahHtml = halaman.problems.map((p, i) => renderProblem(p, i + 1)).join('\n');
 
   return {
     id: halaman.id,
@@ -144,12 +143,8 @@ export function renderHalaman(halaman, config) {
     since: halaman.since,
     summary: halaman.summary,
     tags: halaman.tags,
-    featured: halaman.featured,
     kata: halaman.kata,
-    sebelum: bagianLain.find((b) => b.judul.trim().toLowerCase() === 'sebelum mulai')?.isi ?? '',
-    sesudah: bagianLain.find((b) => b.judul.trim().toLowerCase() === 'hasil akhir')?.isi ?? '',
     bagianLain: bagianLain
-      .filter((b) => !['sebelum mulai', 'hasil akhir'].includes(b.judul.trim().toLowerCase()))
       .map((b) => ({ judul: b.judul, id: slug(b.judul), html: mdKeHtml(b.isi) })),
     langkah: halaman.langkah.map((l) => ({
       n: l.n,
@@ -160,9 +155,6 @@ export function renderHalaman(halaman, config) {
     })),
     htmlLangkah: langkahHtml,
     htmlVideo: videoHtml,
-    htmlMasalah: masalahHtml,
-    htmlSebelum: mdKeHtml(halaman.bagian.find((b) => b.judul.trim().toLowerCase() === 'sebelum mulai')?.isi ?? ''),
-    htmlHasil: mdKeHtml(halaman.bagian.find((b) => b.judul.trim().toLowerCase() === 'hasil akhir')?.isi ?? ''),
     videos: halaman.videos.map((v) => ({
       judul: v.judul,
       id: parseUrlYoutube(v.tautan)?.id ?? '',
@@ -170,7 +162,6 @@ export function renderHalaman(halaman, config) {
       durasi: v.durasi && !v.durasi.salah ? formatDetik(v.durasi.detik) : null,
       bab: v.bab.map((b) => ({ waktu: b.waktu, detik: b.detik, label: b.label })),
     })),
-    problems: halaman.problems,
     // Tempat data untuk tahap 2. Belum ada kode maupun tampilannya.
     glossary: [],
     feedback: null,
@@ -228,20 +219,6 @@ function renderVideo(video, nomor, halamanId) {
     + `</article>`;
 }
 
-function renderProblem(problem, nomor) {
-  const isi = (teks) => mdKeHtml(teks) || '<p>Belum diisi.</p>';
-  const judulMasalah = mdKeHtml(problem.masalah).replace(/^<p>|<\/p>$/g, '');
-  return `<details class="masalah">`
-    + `<summary class="masalah-ringkas"><span class="masalah-label">${ikonPakai('warning')}Masalah</span>`
-    + `<span class="masalah-judul">${judulMasalah}</span></summary>`
-    + `<div class="masalah-isi">`
-    + `<div class="masalah-baris"><p class="masalah-nama">${ikonPakai('search')}Penyebab</p>`
-    + `<div class="masalah-teks">${isi(problem.penyebab)}</div></div>`
-    + `<div class="masalah-baris"><p class="masalah-nama">${ikonPakai('check')}Solusi</p>`
-    + `<div class="masalah-teks">${isi(problem.solusi)}</div></div>`
-    + `</div></details>`;
-}
-
 /** Membangun indeks pencarian ringan dari daftar halaman. */
 export function bangunIndeksPencarian(daftarHalamanJson) {
   const indeks = {};
@@ -293,7 +270,6 @@ export function bangunData({ config, bahasa, daftarHalaman, indeks, changelog, t
       langs: config.langs,
       groups: config.groups,
       badges: config.badges,
-      sidebar: { markFeatured: config.sidebar?.markFeatured !== false },
       analytics: Boolean(config.analytics.cloudflareWebAnalytics && config.analytics.siteId),
     },
     // Kunci ini disiapkan untuk tahap 2. Nilainya kosong dan belum dipakai.

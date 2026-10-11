@@ -200,12 +200,6 @@
       "pesan": "Urutan bab harus naik"
     },
     {
-      "nama": "36-masalah-tanpa-penyebab",
-      "berkas": ["36-masalah-tanpa-penyebab.md"],
-      "salinFO": ["01-masalah-tanpa-penyebab.md"],
-      "pesan": "bagian \"Penyebab\" kosong"
-    },
-    {
       "nama": "37-tanpa-langkah",
       "berkas": ["37-tanpa-langkah.md"],
       "salinFO": ["01-tanpa-langkah.md"],

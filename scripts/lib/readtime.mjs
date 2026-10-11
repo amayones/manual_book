@@ -2,7 +2,7 @@
 
 /**
  * Membuang blok ::: satu level beserta isinya. Dipakai agar teks pin,
- * judul video, dan isi troubleshooting tidak ikut dihitung sebagai kata baca.
+ * judul video tidak ikut dihitung sebagai kata baca.
  */
 export function buangBlok(raw) {
   return String(raw ?? '').replace(/^:::[^\n]*\n[\s\S]*?^:::[^\n]*$/gm, '\n');

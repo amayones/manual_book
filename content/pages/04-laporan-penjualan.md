@@ -10,14 +10,6 @@ tags: [laporan, ekspor, filter, periode]
 # updated masih dalam 45 hari dari 2026-10-10.
 ---
 
-## Sebelum mulai
-
-Pastikan ada transaksi tersimpan pada periode yang ingin Anda lihat.
-
-## Hasil akhir
-
-Anda memperoleh ringkasan sesuai filter dan berkas ekspor bila diunduh.
-
 ## Panduan
 
 ### 1. Pilih periode laporan
@@ -48,20 +40,6 @@ Klik **Ekspor** (nomor 1) untuk mengunduh berkas CSV periode aktif.
 
 ::: tip
 Ekspor ulang setelah mengganti filter bila perlu berkas per status.
-:::
-
-## Troubleshooting
-
-::: problem
-**Masalah:** Grafik kosong setelah periode dipilih.
-**Penyebab:** Tidak ada transaksi pada periode itu.
-**Solusi:** Lebarkan periode atau kembalikan filter ke Semua status.
-:::
-
-::: problem
-**Masalah:** Berkas ekspor tidak terunduh.
-**Penyebab:** Browser memblokir unduhan otomatis.
-**Solusi:** Izinkan unduhan pada bilah alamat, lalu klik Ekspor lagi.
 :::
 
 ## Video

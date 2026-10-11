@@ -61,7 +61,6 @@ test('fixture halaman yang benar lolos dari semua pemeriksaan', async (t) => {
   assert.equal(contoh.tags.length, 2);
   assert.equal(contoh.langkah.length, 2);
   assert.equal(contoh.videos.length, 1);
-  assert.equal(contoh.problems.length, 1);
   assert.equal(contoh.videos[0].durasi.detik, 90);
   assert.equal(contoh.videos[0].bab.length, 2);
 });

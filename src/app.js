@@ -405,17 +405,6 @@
 
     artikel.appendChild(kepala);
 
-    if (halaman.htmlSebelum) {
-      var sebelum = buat('section', 'kotak sebelum-mulai');
-      var judulSebelum = buat('h2', 'kotak-judul');
-      judulSebelum.id = 'sebelum-mulai';
-      judulSebelum.appendChild(buatIkon('list', true));
-      judulSebelum.appendChild(buat('span', '', 'Sebelum mulai'));
-      sebelum.appendChild(judulSebelum);
-      sebelum.insertAdjacentHTML('beforeend', halaman.htmlSebelum);
-      artikel.appendChild(sebelum);
-    }
-
     var tablist = buat('div', 'tablist');
     tablist.setAttribute('role', 'tablist');
     tablist.setAttribute('aria-label', 'Isi halaman ' + halaman.title);
@@ -445,32 +434,14 @@
       });
       tombol.id = 'tab-' + pasangan[0];
       tablist.appendChild(tombol);
+      // Judul level dua untuk pembaca layar, supaya urutan h1 lalu h3 tidak melompat.
+      pasangan[2].appendChild(buat('h2', 'sr-only', pasangan[1]));
     });
 
     panelPanduan.setAttribute('aria-labelledby', 'tab-guide');
     panelVideo.setAttribute('aria-labelledby', 'tab-video');
 
     panelPanduan.insertAdjacentHTML('beforeend', halaman.htmlLangkah || '');
-
-    if (halaman.htmlHasil) {
-      var hasil = buat('section', 'kotak hasil-akhir');
-      var judulHasil = buat('h2', 'kotak-judul');
-      judulHasil.id = 'hasil-akhir';
-      judulHasil.appendChild(buatIkon('flag', true));
-      judulHasil.appendChild(buat('span', '', 'Hasil akhir'));
-      hasil.appendChild(judulHasil);
-      hasil.insertAdjacentHTML('beforeend', halaman.htmlHasil);
-      panelPanduan.appendChild(hasil);
-    }
-
-    if (halaman.htmlMasalah) {
-      var masalah = buat('section', 'kotak masalah-kotak');
-      var judulMasalah = buat('h2', 'kotak-judul', 'Masalah yang sering terjadi');
-      judulMasalah.id = 'masalah-sering';
-      masalah.appendChild(judulMasalah);
-      masalah.insertAdjacentHTML('beforeend', halaman.htmlMasalah);
-      panelPanduan.appendChild(masalah);
-    }
 
     panelVideo.insertAdjacentHTML('beforeend', halaman.htmlVideo || '');
 
@@ -503,8 +474,8 @@
 
 /**
    * Halaman Beranda: logo besar, nama aplikasi, kalimat penjelasan, kotak
-   * pencarian besar, lalu kartu halaman per grup. Isi diambil dari bagian
-   * "Sebelum mulai" pada berkas 00-beranda.md.
+   * pencarian besar, kartu halaman per grup, lalu teks pengantar dari bagian
+   * biasa pada berkas 00-beranda.md.
    */
   function renderPembuka(artikel, halaman) {
     var meta = data.meta;
@@ -518,13 +489,19 @@
     pembuka.appendChild(buatKotakCariBesar());
     artikel.appendChild(pembuka);
 
-    if (halaman.htmlSebelum) {
+    artikel.appendChild(buatKartuGrup());
+
+    var bagian = halaman.bagianLain || [];
+    if (bagian.length) {
       var isi = buat('div', 'pembuka-isi');
-      isi.insertAdjacentHTML('beforeend', halaman.htmlSebelum);
+      for (var b = 0; b < bagian.length; b += 1) {
+        var satu = buat('section', 'pembuka-bagian');
+        satu.appendChild(buat('h2', 'pembuka-bagian-judul', bagian[b].judul));
+        satu.insertAdjacentHTML('beforeend', bagian[b].html);
+        isi.appendChild(satu);
+      }
       artikel.appendChild(isi);
     }
-
-    artikel.appendChild(buatKartuGrup());
   }
 
   /** Kotak pencarian besar di beranda; hasilnya muncul tepat di bawah input. */
@@ -681,10 +658,6 @@
     var daftarJudul = qsa('h2, h3', panel).filter(function (h) {
       return h.id && h.textContent.trim() !== '';
     });
-    if (tab !== 'video') {
-      var awal = qs('#sebelum-mulai', ISI);
-      if (awal) daftarJudul.unshift(awal);
-    }
     var judul = daftarJudul;
     for (var i = 0; i < judul.length; i += 1) {
       var h = judul[i];
@@ -981,7 +954,6 @@
     kosongkan(LACI_ISI);
     var halamanSekarang = state.pageId;
     var aktif = null;
-    var tandaiFeatured = data.meta.sidebar.markFeatured !== false;
 
     // Beranda berada di luar daftar grup, sama seperti Catatan Perubahan.
     var beranda = buat('a', 'menu-item menu-beranda');
@@ -997,8 +969,6 @@
       beranda.setAttribute('aria-current', 'page');
     }
     LACI_ISI.appendChild(beranda);
-
-    
 
     (data.meta.groups || []).forEach(function (grup) {
       var isi = halamanTerurut().filter(function (h) { return h.group === grup.id; });
@@ -1032,12 +1002,6 @@
         ikonItem.appendChild(buatIkon(h.icon));
         tautan.appendChild(ikonItem);
         tautan.appendChild(buat('span', 'menu-item-teks', h.title));
-        if (tandaiFeatured && h.featured) {
-          var bintang = buat('span', 'menu-item-bintang');
-          bintang.setAttribute('aria-hidden', 'true');
-          bintang.appendChild(buatIkon('star'));
-          tautan.appendChild(bintang);
-        }
         if (h.id === halamanSekarang) {
           tautan.classList.add('menu-item-aktif');
           tautan.setAttribute('aria-current', 'page');

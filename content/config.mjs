@@ -45,11 +45,6 @@ export default {
     { id: 'laporan', label: 'Laporan', icon: 'chart' },
   ],
 
-  // -- Sidebar --
-  sidebar: {
-    markFeatured: true, // Tampilkan bintang pada halaman featured.
-  },
-
   // -- Halaman khusus --
   specialPages: { changelog: true }, // Halaman ini dibangun dari content/changelog.md.
 

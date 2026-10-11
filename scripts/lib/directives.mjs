@@ -5,7 +5,6 @@
 //   ::: tip        callout: tips
 //   ::: warn       callout: peringatan
 //   ::: note       callout: catatan
-//   ::: problem    satu masalah troubleshooting (Masalah, Penyebab, Solusi)
 //   ::: video      satu video (judul, penjelasan, link, durasi, bab)
 //
 // Parser ini hanya menghasilkan DATA dan penanda struktural. Semua pesan error
@@ -272,28 +271,6 @@ export function parseVideo(isi, nomorBarisAwal = 1) {
     teksKeterangan.push(teks);
   }
   hasil.penjelasan = teksKeterangan.join('\n').trim();
-  return hasil;
-}
-
-/** Membaca satu blok troubleshooting. */
-export function parseProblem(isi, nomorBarisAwal = 1) {
-  const baris = isi.split(/\r?\n/);
-  const hasil = { masalah: '', penyebab: '', solusi: '', baris: { masalah: 0, penyebab: 0, solusi: 0 } };
-  let tujuan = null;
-  for (let i = 0; i < baris.length; i += 1) {
-    const teks = baris[i];
-    const noBaris = nomorBarisAwal + i;
-    const cocok = teks.match(/^\s*\*{0,2}(Masalah|Penyebab|Solusi)\*{0,2}:?\*{0,2}\s*([\s\S]*)$/);
-    if (cocok) {
-      tujuan = cocok[1].toLowerCase();
-      hasil[tujuan] = cocok[2].trim();
-      hasil.baris[tujuan] = noBaris;
-      continue;
-    }
-    if (tujuan && teks.trim()) {
-      hasil[tujuan] += `\n${teks.trim()}`;
-    }
-  }
   return hasil;
 }
 

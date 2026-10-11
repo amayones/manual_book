@@ -11,14 +11,6 @@ tags: [dashboard, ringkasan, filter]
 since: 2026-08-12
 ---
 
-## Sebelum mulai
-
-Anda harus sudah berhasil login sebelum membuka halaman ini.
-
-## Hasil akhir
-
-Anda melihat ringkasan penjualan sesuai periode yang dipilih.
-
 ## Panduan
 
 ### 1. Kenali bagian Dashboard
@@ -43,14 +35,6 @@ Klik **Pemilih periode** (nomor 1) lalu pilih **Bulan ini** (nomor 2).
 
 ::: tip
 Pilih Minggu ini bila ingin melihat performa harian.
-:::
-
-## Troubleshooting
-
-::: problem
-**Masalah:** Kartu ringkasan masih menampilkan data bulan lalu.
-**Penyebab:** Data di-cache selama satu menit.
-**Solusi:** Tunggu satu menit atau ganti periode lalu kembali.
 :::
 
 ## Video

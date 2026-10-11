@@ -9,7 +9,6 @@ import {
   parseDurasi,
   parseLangkah,
   parsePin,
-  parseProblem,
   parseUrlYoutube,
   parseVideo,
   pecahBagian,
@@ -69,16 +68,6 @@ test('parsePin menandai koordinat yang tidak terbaca', () => {
   const pin = parsePin('1. 50,20 Tanpa kurung', 1);
   assert.equal(pin[0].salahBentuk, true);
   assert.equal(pin[0].x, null);
-});
-
-test('parseProblem membaca tiga bagian troubleshooting', () => {
-  const isi = ['**Masalah:** Akun terkunci.', '**Penyebab:** Terlalu kali salah.', '**Solusi:** Tunggu 15 menit.'].join('\n');
-  const p = parseProblem(isi, 20);
-  assert.equal(p.masalah, 'Akun terkunci.');
-  assert.equal(p.penyebab, 'Terlalu kali salah.');
-  assert.equal(p.solusi, 'Tunggu 15 menit.');
-  assert.equal(p.baris.masalah, 20);
-  assert.equal(p.baris.solusi, 22);
 });
 
 test('parseVideo membaca judul, penjelasan, tautan, durasi, dan bab', () => {

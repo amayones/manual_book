@@ -9,14 +9,6 @@ tags: [contoh, acuan]
 featured: true
 ---
 
-## Sebelum mulai
-
-Pastikan aplikasi sudah terbuka dan Anda sudah menerima email aktivasi.
-
-## Hasil akhir
-
-Anda masuk ke Dashboard dan melihat data milik akun Anda sendiri.
-
 ## Panduan
 
 ### 1. Buka halaman login
@@ -38,14 +30,6 @@ Klik tombol Masuk lalu tunggu beberapa detik sampai Dashboard terbuka.
 
 ::: warn
 Jangan menekan tombol Masuk berulang kali. Tunggu 10 detik bila proses terasa lama.
-:::
-
-## Troubleshooting
-
-::: problem
-**Masalah:** Muncul pesan "Email atau kata sandi salah" padahal keduanya sudah benar.
-**Penyebab:** Ada spasi di akhir email yang ikut tersalin.
-**Solusi:** Salin ulang email dari email aktivasi lalu tempel tanpa spasi.
 :::
 
 ## Video

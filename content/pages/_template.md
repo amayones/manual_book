@@ -10,14 +10,6 @@ level: Dasar
 since: 2026-09-01
 ---
 
-## Sebelum mulai
-
-Sebutkan apa yang perlu disiapkan sebelum mengikuti langkah-langkah di bawah ini.
-
-## Hasil akhir
-
-Jelaskan hasil yang akan didapat setelah semua langkah selesai.
-
 ## Panduan
 
 ### 1. Judul langkah pertama
@@ -39,14 +31,6 @@ Tulis penjelasan singkat di bawah gambar.
 
 ::: warn
 Tuliskan peringatan singkat di sini dengan ::: warn
-:::
-
-## Troubleshooting
-
-::: problem
-**Masalah:** Tuliskan gejala yang dilihat pengguna.
-**Penyebab:** Tuliskan penyebab sebenarnya.
-**Solusi:** Tuliskan langkah penyelesaian yang konkret.
 :::
 
 ## Video
