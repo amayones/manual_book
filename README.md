@@ -378,13 +378,26 @@ pemain 16:9, sehingga kartu tidak menampilkan dua video bertumpuk.
 Di bawah 700 px layar, tombol Menu dan brand berubah jadi ikon saja supaya
 header tetap satu baris, dan pencarian tetap ada di navbar (bukan hanya di
 Beranda). Ukuran huruf isi mengecil ke 16 px, jarak antarbagian dirapatkan,
-dan semua tombol utamaMinimal 44 x 44 px agar enak ditekuk jari.
+dan semua tombol utama minimal 44 x 44 px agar enak ditekuk jari.
 
 Tinggi header diukur ulang oleh JavaScript lalu ditulis ke variabel CSS
 `--tinggi-bilah`, sehingga `padding-top` halaman, posisi menu geser, dan
 lompatan ke sebuah langkah selalu pas — termasuk ketika pengguna memperbesar
-huruf di browser sampai 200%.-tested pada lebar 320, 360, 390, 430, dan 768 px
+huruf di browser sampai 200%. Diuji pada lebar 320, 360, 390, 430, dan 768 px
 serta ukuran huruf 150% dan 200%.
+
+## Kepala halaman dan kartu
+
+Kepala setiap halaman hanya berisi ikon, judul, lencana (Baru atau
+Diperbarui), dan satu kalimat ringkasan. Waktu baca ("2 menit") dan
+indikator level tidak lagi ditampilkan karena membingungkan — keduanya sudah
+dihitung build dan tetap ada di berkas data, tetapi tidak dirender di mana
+pun. Kartu di Beranda memakai isi yang sama.
+
+Tombol Menu di navbar memakai latar warna aksen dengan ikon lebih besar
+daripada tulungannya, supaya jelas terbaca sebagai kontrol buka/tutup dan
+tidak tertukar dengan tombol tema. Tombol Tutup di dalam menu geser memakai
+gaya yang sama.
 
 ## Status milestone
 

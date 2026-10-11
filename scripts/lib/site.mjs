@@ -38,7 +38,7 @@ function renderPin(blok) {
   const butir = daftar.map((p) => {
     const label = esc(p.label ?? '');
     return `<li class="pin-item" data-x="${p.x}" data-y="${p.y}">`
-      + `<button class="pin" type="button" data-action="pin" tabindex="0" aria-label="Lokasi ${label}">`
+      + `<button class="pin" type="button" data-action="pin" tabindex="0" aria-label="Lokasi ${p.nomor}: ${label}">`
       + `<span class="pin-angka">${p.nomor}</span>`
       + `<span class="pin-label">${label}</span></button></li>`;
   });

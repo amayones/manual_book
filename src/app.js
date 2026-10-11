@@ -206,29 +206,6 @@
 
   // ------------------------------------------------------------- beranda
 
-  /** Satu baris dua chip di bawah judul: waktu baca dan indikator level. */
-  function buatChipHalaman(halaman) {
-    var baris = buat('ul', 'halaman-chip');
-
-    var waktu = buat('li', 'halaman-chip-item');
-    waktu.appendChild(buatIkon('clock', true));
-    waktu.appendChild(buat('span', '', halaman.readTime + ' menit'));
-    baris.appendChild(waktu);
-
-    var tingkat = ['Dasar', 'Menengah', 'Lanjut'].indexOf(halaman.level) + 1;
-    var chipLevel = buat('li', 'halaman-chip-item');
-    var batang = buat('span', 'tingkat-batang');
-    batang.setAttribute('aria-hidden', 'true');
-    for (var b = 0; b < 3; b += 1) {
-      batang.appendChild(buat('span', 'tingkat-isi' + (b < tingkat ? ' tingkat-isi-aktif' : '')));
-    }
-    chipLevel.appendChild(batang);
-    chipLevel.appendChild(buat('span', 'sr-only', 'Level ' + halaman.level));
-    baris.appendChild(chipLevel);
-
-    return baris;
-  }
-
   // --------------------------------------------------------------- pencarian
 
   /**
@@ -425,7 +402,6 @@
     }
     kepala.appendChild(barisJudul);
     kepala.appendChild(buat('p', 'halaman-ringkas', halaman.summary));
-    kepala.appendChild(buatChipHalaman(halaman));
 
     artikel.appendChild(kepala);
 
@@ -629,27 +605,6 @@
     }
     kartu.appendChild(kepala);
     kartu.appendChild(buat('span', 'kartu-ringkas', halaman.summary));
-
-    var baris = buat('span', 'kartu-meta');
-    var waktu = buat('span', 'kartu-meta-item');
-    var ikonJam = buat('span', 'kartu-meta-ikon');
-    ikonJam.setAttribute('aria-hidden', 'true');
-    ikonJam.appendChild(buatIkon('clock', true));
-    waktu.appendChild(ikonJam);
-    waktu.appendChild(buat('span', '', halaman.readTime + ' menit'));
-    baris.appendChild(waktu);
-
-    var tingkat = ['Dasar', 'Menengah', 'Lanjut'].indexOf(halaman.level) + 1;
-    var level = buat('span', 'kartu-meta-item');
-    var batang = buat('span', 'tingkat-batang');
-    batang.setAttribute('aria-hidden', 'true');
-    for (var b = 0; b < 3; b += 1) {
-      batang.appendChild(buat('span', 'tingkat-isi' + (b < tingkat ? ' tingkat-isi-aktif' : '')));
-    }
-    level.appendChild(batang);
-    level.appendChild(buat('span', 'sr-only', 'Level ' + halaman.level));
-    baris.appendChild(level);
-    kartu.appendChild(baris);
     li.appendChild(kartu);
     return li;
   }

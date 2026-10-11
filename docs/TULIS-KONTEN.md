@@ -44,13 +44,20 @@ Bagian opsional:
 
 ```markdown
 icon: lock          # Nama ikon; kosong berarti memakai ikon grup
-level: Menengah     # Dasar, Menengah, atau Lanjut; kosong berarti Dasar
-readTime: 5         # Kosong berarti dihitung otomatis dari panjang teks
+level: Menengah     # Dasar, Menengah, atau Lanjut. Tidak lagi ditampilkan
+                    # di layar, tetapi tetap dibaca build.
+readTime: 5         # Kosong berarti dihitung otomatis dari panjang teks.
+                    # Tidak lagi ditampilkan di layar.
 tags: [masuk, akun] # Kata kunci untuk pencarian
 featured: true      # Halaman ini dapat bintang di sidebar
 since: 2026-09-01   # Tanggal halaman pertama dibuat. Wajib diisi agar badge
                       # "Baru" bisa tampil; bila kosong, halaman tidak pernah "Baru".
 ```
+
+> `level` dan `readTime` sudah tidak dirender di halaman maupun di kartu
+> Beranda, jadi boleh dihapus dari frontmatter bila tidak diperlukan. Keduanya
+> tetap dihitung build dan dipakai pengujian, jadi tidak ada yang rusak bila
+> dibiarkan.
 
 ## 3. Isi halaman
 

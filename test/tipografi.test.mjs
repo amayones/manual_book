@@ -2,7 +2,7 @@
 //
 // Aturan yang dijaga:
 // - Semua font-size memakai variabel --t-* (t-judul, t-bagian, t-isi,
-//   t-kecil).
+//   t-kecil, t-label).
 // - Hanya dua ketebalan: 400 dan 600.
 // - Tidak ada text-transform: uppercase maupun letter-spacing.
 // - Tidak ada font monospace.
@@ -20,6 +20,7 @@ const UKURAN_DIizinkan = [
   'var(--t-bagian)',
   'var(--t-isi)',
   'var(--t-kecil)',
+  'var(--t-label)',
 ];
 
 /** Membangun proyek uji lalu membaca CSS sumber yang sudah diawetkan. */

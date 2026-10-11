@@ -82,6 +82,25 @@ V1d (video tidak dobel + tampilan mobile, 36 skenario, semua lulus):
 10. Lighthouse mode seluler di Beranda dan di halaman video: performa 99,
     aksesibilitas 100, praktik terbaik 100, SEO 100, CLS 0.
 
+V1e (hapus chip menit dan level, tombol menu digayakan, 48 skenario, semua
+lulus):
+
+1. Kepala halaman tidak lagi punya `.halaman-chip` maupun `.tingkat-batang`,
+   dan teks "2 menit" hilang; isinya hanya ikon, baris judul, dan ringkasan.
+2. Kartu Beranda tidak lagi punya `.kartu-meta` dan teks "menit" hilang;
+   isinya hanya kepala kartu dan ringkasan.
+3. Tombol Menu di navbar: ikon 23px lebih besar dari huruf "Menu" 13px
+   (lewat variabel `--t-label`), latar `rgb(37, 99, 235)` berbeda dari tombol
+   tema `rgb(241, 245, 249)`, teks putih, tinggi tetap 44px, nama aksesibel
+   "Buka menu".
+4. Tombol Tutup di dalam laci memakai latar dan warna yang sama dengan tombol
+   Menu, ikon 21px lebih besar dari huruf "Tutup" 13px.
+5. Audit Lighthouse `label-content-name-mismatch` pada pin screenshot juga
+   diperbaiki: nama aksesibel pin kini "Lokasi 1: Kolom email", jadi memuat
+   angka yang terlihat di dalam pin. Aksesibilitas halaman Login kembali 100.
+6. Tidak ada regresi pada seluruh lebar 320 sampai 1440px, tidak ada scroll
+   horizontal, dan nol galat JavaScript.
+
 Verifikasi sessionStorage eksplisit (7 skenario, semua lulus):
 `/?p=login&s=2` mengisi `mb:last` (`login`, langkah 2); `/?p=halaman-salah`
 tidak mengubah `mb:last`; refresh menampilkan pemulihan sesi (Login),
