@@ -1128,6 +1128,21 @@
     return window.matchMedia('(min-width: 1024px)').matches;
   }
 
+  /**
+   * Tinggi header bisa bertambah saat teks membungkus atau ukuran huruf
+   * diperbesar pengguna. Nilainya ditulis ke --tinggi-bilah supaya
+   * padding halaman, posisi laci, dan lompatan antarbagian tetap pas.
+   */
+  function sinkronTinggiBilah() {
+    var bilah = qs('.bilah-atas');
+    if (!bilah) return;
+    var tinggi = Math.round(bilah.getBoundingClientRect().height);
+    if (!tinggi) return;
+    var nilai = tinggi + 'px';
+    if (AKAR.style.getPropertyValue('--tinggi-bilah') === nilai) return;
+    AKAR.style.setProperty('--tinggi-bilah', nilai);
+  }
+
   function sinkronLaci() {
     if (!LACI) return;
     if (layarLebar()) {
@@ -1222,8 +1237,7 @@
     iframe.allowFullscreen = true;
     iframe.src = embed + '&autoplay=1';
     slot.appendChild(iframe);
-    var tombol = qs('.video-putar', artikel);
-    if (tombol) tombol.hidden = true;
+    artikel.classList.add('video-berjalan');
   }
 
   function lompatKeBab(artikel, detik, tungguMuat) {
@@ -1585,7 +1599,16 @@
     pasangTema();
     pasangLiveReload();
     sinkronLaci();
-    window.addEventListener('resize', sinkronLaci);
+    sinkronTinggiBilah();
+    window.addEventListener('resize', function () {
+      sinkronLaci();
+      sinkronTinggiBilah();
+    });
+    if (window.ResizeObserver) {
+      var pengamat = new ResizeObserver(sinkronTinggiBilah);
+      var bilah = qs('.bilah-atas');
+      if (bilah) pengamat.observe(bilah);
+    }
     ambilData().then(function (isi) {
       data = isi;
       document.body.setAttribute('data-siap', 'ya');

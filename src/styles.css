@@ -176,12 +176,12 @@ h1[tabindex="-1"]:focus-visible { outline: none; }
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 30;
-  height: var(--tinggi-bilah);
+  min-height: var(--tinggi-bilah);
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.5rem clamp(0.85rem, 3vw, 1.5rem);
-  padding-top: calc(0.5rem + env(safe-area-inset-top));
+  padding: 0.35rem clamp(0.85rem, 3vw, 1.5rem);
+  padding-top: calc(0.35rem + env(safe-area-inset-top));
   background: color-mix(in srgb, var(--kartu) 82%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--garis);
@@ -1311,6 +1311,10 @@ mark {
 .video-player:empty { display: none; }
 .video-iframe { width: 100%; height: 100%; border: 0; display: block; }
 
+/* Begitu video diputar, thumbnail disembunyikan agar tidak menumpuk di atas pemutar. */
+.video-berjalan .video-thumb { display: none; }
+.video-berjalan .video-player { display: block; }
+
 .video-bab {
   list-style: none;
   margin: 0;
@@ -1709,10 +1713,50 @@ mark {
   :root { --lebar: 84rem; --lebar-sisi: 19rem; }
 }
 
+/* Tablet: pencarian dikCAP agar header tetap satu baris. */
+@media (max-width: 768px) {
+  .cari-navbar { max-width: 20rem; }
+}
+
+/* Layar kecil: header tetap satu baris. Tombol Menu dan brand dirampingkan,
+   pencarian tetap ada di navbar supaya cepat dijangkau dari halaman mana pun. */
 @media (max-width: 640px) {
-  .bilah-atas { flex-wrap: wrap; row-gap: 0.35rem; padding-bottom: 0.5rem; height: auto; }
-  .bilah-navigasi { flex: none; }
-  .cari-navbar { order: 3; flex-basis: 100%; max-width: none; margin-inline: 0; }
+  .bilah-atas { gap: 0.5rem; padding-inline: 0.6rem; }
+  .bilah-navigasi { margin-inline-start: 0; }
+  .tombol-menu, .tombol-tema { padding-inline: 0; width: 44px; }
+  .tombol-menu .tombol-teks { display: none; }
+  .merek { min-height: 44px; min-width: 44px; justify-content: center; }
+  .cari-navbar { max-width: none; min-width: 4.5rem; flex: 1 1 auto; }
+  .cari-navbar .cari-input { padding-inline: 2.4rem 0.6rem; }
+  .cari-ikon { left: 0.7rem; }
+
+  /* Nama brand disembunyikan secara visual, tetapi tetap dibaca pembaca layar. */
+  .merek-nama {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* Tipografi dan kepadatan untuk layar kecil. */
+@media (max-width: 640px) {
+  :root {
+    --t-judul: clamp(1.5rem, 7vw, 1.875rem);
+    --t-bagian: 1.25rem;
+    --t-isi: 1rem;
+    --t-kecil: 0.875rem;
+  }
+
+  .wadah { padding-inline: 0.85rem; }
+  .kelompok-kartu { margin-top: 1.75rem; gap: 1.25rem; }
+  .kartu { padding: 0.85rem 0.9rem; }
+  .pembuka { padding-top: 1.25rem; }
+  .cari-besar-input { height: 50px; }
+  .langkah, .video { padding-block: 1.25rem; }
+  .video-bab-item { font-size: var(--t-kecil); padding: 0.4rem 0.7rem; }
   .langkah-judul { flex-wrap: wrap; }
   .tombol-salin { margin-inline-start: 2.35rem; }
   .kartu-daftar { grid-template-columns: 1fr; }

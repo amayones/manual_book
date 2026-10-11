@@ -369,6 +369,22 @@ Pemutar YouTube baru dimuat setelah tombol putar diklik dan butuh koneksi ke
 `youtube-nocookie.com`. Bila jaringan kantor memblokir YouTube, video tidak
 bisa diputar dari jaringan tersebut. Kartu bertuliskan "Video contoh" berarti
 ID pada Markdown masih `VIDEO_ID_CONTOH` dan harus diganti ID asli.
+Thumbnail YouTube hanya dipakai sebagairiktan: begitu video diputar (lewat
+tombol putar atau klik bab), thumbnail disembunyikan dan digantikan iframe
+pemain 16:9, sehingga kartu tidak menampilkan dua video bertumpuk.
+
+## Tampilan di ponsel
+
+Di bawah 700 px layar, tombol Menu dan brand berubah jadi ikon saja supaya
+header tetap satu baris, dan pencarian tetap ada di navbar (bukan hanya di
+Beranda). Ukuran huruf isi mengecil ke 16 px, jarak antarbagian dirapatkan,
+dan semua tombol utamaMinimal 44 x 44 px agar enak ditekuk jari.
+
+Tinggi header diukur ulang oleh JavaScript lalu ditulis ke variabel CSS
+`--tinggi-bilah`, sehingga `padding-top` halaman, posisi menu geser, dan
+lompatan ke sebuah langkah selalu pas — termasuk ketika pengguna memperbesar
+huruf di browser sampai 200%.-tested pada lebar 320, 360, 390, 430, dan 768 px
+serta ukuran huruf 150% dan 200%.
 
 ## Status milestone
 

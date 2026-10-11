@@ -46,8 +46,11 @@ M4/M5/M6 — skenario tambahan (35 skenario, semua lulus):
 9. Video ber-ID valid (`aaaaaaaaaaa`): thumbnail tampil, iframe belum ada
    sebelum diklik, klik membuat iframe `youtube-nocookie.com/embed/...`
    dengan `enablejsapi=1` dan `autoplay=1`, klik bab memanggil postMessage
-   `seekTo` dengan detik yang benar ke iframe yang sama. Pemutaran YouTube
-   sungguhan belum diuji (butuh jaringan dan akun).
+   `seekTo` dengan detik yang benar ke iframe yang sama. Thumbnail
+   disembunyikan saat iframe muncul (kelas `video-berjalan`), jadi kartu
+   video tidak menjadi dobel: tinggi kartu sebelum dan sesudah klik sama
+   (460 px -> 460 px). Pemutaran YouTube sungguhan belum diuji (butuh
+   jaringan dan akun).
 10. `prefers-reduced-motion: reduce` terdeteksi; durasi animasi kartu `0s`.
 11. Lebar 320 px: kelebihan 0 px (tidak ada scroll horizontal).
 12. Tema dark (`rgb(10, 15, 26)`) dan light (`rgb(246, 247, 251)`) diterapkan.
@@ -55,15 +58,40 @@ M4/M5/M6 — skenario tambahan (35 skenario, semua lulus):
     `/favicon.ico` bawaan browser dan `/__dev/reload` pada server uji
     statis; keduanya jinak dan dijelaskan di laporan).
 
+V1d (video tidak dobel + tampilan mobile, 36 skenario, semua lulus):
+
+1. Sebelum diklik hanya thumbnail yang tampil; setelah diklik iframe muncul,
+   thumbnail `display: none`, dan tinggi kartu tidak berubah.
+2. Klik bab video juga menyembunyikan thumbnail, bukan hanya tombol "Putar".
+3. Lebar 320, 360, 390, 430, dan 768 px: header tetap satu baris
+   (56 px, di 768 px 57 px) dan tinggi itu ditulis ke `--tinggi-bilah`, jadi
+   `padding-top` halaman, posisi laci, dan lompatan antarbagian tetap pas.
+4. Konten tidak tertutup header di semua lebar tersebut (ikon halaman mulai
+   di y=72 px, di bawah header 56 px).
+5. Pencarian tetap ada di navbar pada 320-430 px dengan lebar 145-255 px dan
+   tinggi 44 px, serta tidak keluar layar.
+6. Tombol Menu dan brand jadi ikon 44 x 44 px di bawah 700 px; nama brand
+   disembunyikan secara visual tetapi masih dibaca pembaca layar.
+7. Font isi di 360 px mengecil ke 16 px; tidak ada scroll horizontal.
+8. Huruf diperbesar 150% dan 200%: tinggi header ikut_naik (69 px dan
+   91 px) dan `padding-top` menyesuaikan, tidak ada konten tertutup. Ini
+   thanks pengaman `sinkronTinggiBilah()` yang menulis `--tinggi-bilah`
+   dari tinggi header sebenarnya memakai ResizeObserver.
+9. Laci menu terbuka utuh di 360 px (lebar 310 px, tidak keluar layar) dan
+   pencarian navbar tetap berfungsi setelah laci ditutup.
+10. Lighthouse mode seluler di Beranda dan di halaman video: performa 99,
+    aksesibilitas 100, praktik terbaik 100, SEO 100, CLS 0.
+
 Verifikasi sessionStorage eksplisit (7 skenario, semua lulus):
 `/?p=login&s=2` mengisi `mb:last` (`login`, langkah 2); `/?p=halaman-salah`
 tidak mengubah `mb:last`; refresh menampilkan pemulihan sesi (Login),
 bukan layar galat; URL tetap bersih.
 
 Lighthouse (Chromium sistem, `npx lighthouse`, tanpa menambah dependensi):
-Performance 96, Accessibility 96, Best Practices 96. CLS 0.152 —
-satu-satunya penurun skor adalah footer yang bergeser saat kartu beranda
-dimuat (di bawah fold). Hero sudah pra-render di build untuk menekan ini.
+Performance 99, Accessibility 100, Best Practices 100, SEO 100, CLS 0
+di mode seluler (viewport 360 px) maupun desktop. Tidak ada lagi pergeseran
+layout saat dimuat karena tinggi header ditulis ke `--tinggi-bilah` sebelum
+gambar pertama tampil.
 
 Rasio kontras (`node scripts/kontras.mjs`): 27 pasangan warna LULUS pada
 batas 4.5:1, tema terang dan gelap, termasuk aksen, callout, lencana, pin,
@@ -117,8 +145,9 @@ Skenario browser perlu dijalankan ulang setiap kali `src/` berubah.
 - Setelan sistem "kurangi gerak" aktif: tidak ada animasi dan gulir langsung.
 - Hanya keyboard: Tab/Shift+Tab, panah pada tab, panah atas/bawah+Enter/Esc di
   pencarian, Escape menutup laci, fokus selalu terlihat.
-- Lighthouse sudah dijalankan lokal (96/96/96, CLS 0.125). Setelah deploy,
-  jalankan ulang dan pastikan tidak turun; CLS idealnya mendekati nol.
+- Lighthouse sudah dijalankan lokal (99/100/100/100, CLS 0 di mode seluler).
+  Setelah deploy, jalankan ulang dan pastikan tidak turun; CLS idealnya
+  mendekati nol.
 - Pembaca layar (NVDA atau VoiceOver): tab, daftar masalah, jumlah hasil
   pencarian, toast, dialog lightbox, dan daftar isi.
 
